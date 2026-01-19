@@ -1,0 +1,46 @@
+-mjwx
+-i obj/roland.ihx
+-b _CODE = 0x0100
+-b _DATA = 0x8400
+-u
+-b SPRITES=0x4001
+-k /home/dave/Development/Amstrad/cpct/cpctelera/tools/sdcc-4.5.0/bin/../share/sdcc/lib/z80
+-k /home/dave/Development/Amstrad/cpct/cpctelera/tools/sdcc-4.5.0/share/sdcc/lib/z80
+-l /home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
+-l z80
+obj/intro.rel
+obj/made.rel
+obj/main.rel
+obj/presents.rel
+obj/titles.rel
+obj/dat/font.rel
+obj/dat/images.rel
+obj/dat/sound.rel
+obj/dat/sprites.rel
+obj/lib/asic.rel
+obj/lib/cache.rel
+obj/lib/disc.rel
+obj/lib/hardware.rel
+obj/lib/utilities.rel
+obj/lib/video.rel
+obj/dat/sprites/controls.h.rel
+obj/dat/sprites/controls.rel
+obj/dat/sprites/cpctelera.h.rel
+obj/dat/sprites/cpctelera.rel
+obj/dat/sprites/ghost.h.rel
+obj/dat/sprites/ghost.rel
+obj/dat/sprites/mode.h.rel
+obj/dat/sprites/mode.rel
+obj/dat/sprites/play.h.rel
+obj/dat/sprites/play.rel
+obj/dat/sprites/roland.h.rel
+obj/dat/sprites/roland.rel
+obj/dat/sprites/snowball.h.rel
+obj/dat/sprites/snowball.rel
+obj/dat/sprites/spider.h.rel
+obj/dat/sprites/spider.rel
+obj/lib/crtc.rel
+obj/lib/detectcfg.rel
+obj/lib/readsdcc.rel
+
+-e

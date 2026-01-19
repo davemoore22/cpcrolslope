@@ -1,0 +1,32 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   1 _spider_    00000000 GR  |   1 _spider_=   00000037 GR
+    _spider_=   00000100 G   |     _spider_=   00000038 G   |   1 _spider_    000000D6 GR
+  1 _spider_    00000038 GR  |   1 _spider_=   00000081 GR  |     _spider_=   00000100 G
+    _spider_=   0000004A G   |   1 _spider_    00000082 GR  |   1 _spider_=   000000D5 GR
+    _spider_=   00000100 G   |     _spider_=   00000054 G   |   1 _spider_=   0000010D GR
+    _spider_=   00000100 G   |     _spider_=   00000038 G   |   1 _spider_    0000010E GR
+  1 _spider_=   00000145 GR  |     _spider_=   00000100 G   |     _spider_=   00000038 G
+  1 _spider_    00000146 GR  |   1 _spider_=   00000175 GR  |     _spider_=   00000100 G
+    _spider_=   00000030 G   |   1 _spider_    00000176 GR  |   1 _spider_=   000001A6 GR
+    _spider_=   00000100 G   |     _spider_=   00000031 G   |   1 _spider_    000001A7 GR
+  1 _spider_=   000001D1 GR  |     _spider_=   00000100 G   |     _spider_=   0000002B G
+  1 _spider_    000001D2 GR  |   1 _spider_=   00000216 GR  |     _spider_=   00000100 G
+    _spider_=   00000045 G   |   1 _spider_    00000217 GR  |   1 _spider_=   00000265 GR
+    _spider_=   00000100 G   |     _spider_=   0000004F G   |   1 _spider_    00000266 GR
+  1 _spider_=   000002B6 GR  |     _spider_=   00000100 G   |     _spider_=   00000051 G
+  1 _spider_    000002B7 GR  |   1 _spider_=   00000308 GR  |     _spider_=   00000100 G
+    _spider_=   00000052 G
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size      309   flags    0
+

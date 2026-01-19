@@ -1,0 +1,28 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |     _mode_0     ******** GX  |     _mode_0_    ******** GX
+    _mode_0_=   00000100 G   |     _mode_0_=   00000049 G   |     _mode_1     ******** GX
+    _mode_1_    ******** GX  |     _mode_1_=   00000100 G   |     _mode_1_=   0000004F G
+    _mode_2     ******** GX  |     _mode_2_    ******** GX  |     _mode_2_=   00000100 G
+    _mode_2_=   0000004F G   |     _mode_3     ******** GX  |     _mode_3_    ******** GX
+    _mode_3_=   00000100 G   |     _mode_3_=   0000003C G   |     _mode_4     ******** GX
+    _mode_4_    ******** GX  |     _mode_4_=   00000100 G   |     _mode_4_=   00000047 G
+    _mode_5     ******** GX  |     _mode_5_    ******** GX  |     _mode_5_=   00000100 G
+    _mode_5_=   00000047 G   |     _mode_6     ******** GX  |     _mode_6_    ******** GX
+    _mode_6_=   00000100 G   |     _mode_6_=   00000033 G   |     _mode_7     ******** GX
+    _mode_7_    ******** GX  |     _mode_7_=   00000100 G   |     _mode_7_=   00000047 G
+    _mode_8     ******** GX  |     _mode_8_    ******** GX  |     _mode_8_=   00000100 G
+    _mode_8_=   0000003B G
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size        0   flags    0
+

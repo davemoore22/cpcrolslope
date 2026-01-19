@@ -1,0 +1,405 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module cache
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _a_page_disconnect_safe
+                                     12 	.globl _a_page_connect_safe
+                                     13 	.globl _a_sprite_flip_horizontal_inplace
+                                     14 	.globl _cpct_asicCopySpriteData
+                                     15 	.globl _cpct_zx7b_decrunch_s
+                                     16 	.globl _cpct_pageMemory
+                                     17 	.globl _cpct_memcpy
+                                     18 	.globl _cpct_memset
+                                     19 	.globl _g_sprite_banks
+                                     20 	.globl _c_sprite_cache_bank_init
+                                     21 	.globl _c_sprite_cache_bank_upload
+                                     22 ;--------------------------------------------------------
+                                     23 ; special function registers
+                                     24 ;--------------------------------------------------------
+                                     25 ;--------------------------------------------------------
+                                     26 ; ram data
+                                     27 ;--------------------------------------------------------
+                                     28 	.area _DATA
+    00000000                         29 _g_sprite_banks::
+    00000000                         30 	.ds 15
+                                     31 ;--------------------------------------------------------
+                                     32 ; ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area _INITIALIZED
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area _DABS (ABS)
+                                     39 ;--------------------------------------------------------
+                                     40 ; global & static initialisations
+                                     41 ;--------------------------------------------------------
+                                     42 	.area _HOME
+                                     43 	.area _GSINIT
+                                     44 	.area _GSFINAL
+                                     45 	.area _GSINIT
+                                     46 ;--------------------------------------------------------
+                                     47 ; Home
+                                     48 ;--------------------------------------------------------
+                                     49 	.area _HOME
+                                     50 	.area _HOME
+                                     51 ;--------------------------------------------------------
+                                     52 ; code
+                                     53 ;--------------------------------------------------------
+                                     54 	.area _CODE
+                                     55 ;src/lib/cache.c:37: void c_sprite_cache_bank_init(void) {
+                                     56 ;	---------------------------------
+                                     57 ; Function c_sprite_cache_bank_init
+                                     58 ; ---------------------------------
+    00000000                         59 _c_sprite_cache_bank_init::
+    00000000 CDr00r00         [17]   60 	call	___sdcc_enter_ix
+    00000003 3B               [ 6]   61 	dec	sp
+                                     62 ;src/lib/cache.c:42: g_sprite_banks[SPR_BANK_ROLAND_L].offset = bank_offset;
+    00000004 21 00 00         [10]   63 	ld	hl, #0x0000
+    00000007 22r00r00         [16]   64 	ld	(_g_sprite_banks), hl
+                                     65 ;src/lib/cache.c:43: g_sprite_banks[SPR_BANK_ROLAND_L].count = 4;
+    0000000A 21r02r00         [10]   66 	ld	hl, #_g_sprite_banks + 2
+    0000000D 36 04            [10]   67 	ld	(hl), #0x04
+                                     68 ;src/lib/cache.c:44: for (u8 i = 0; i < 4; i++) {
+    0000000F 11 00 00         [10]   69 	ld	de, #0x0000
+    00000012 DD 36 FF 00      [19]   70 	ld	-1 (ix), #0x00
+    00000016                         71 00107$:
+    00000016 DD 7E FF         [19]   72 	ld	a, -1 (ix)
+    00000019 D6 04            [ 7]   73 	sub	a, #0x04
+    0000001B 30 19            [12]   74 	jr	NC, 00101$
+                                     75 ;src/lib/cache.c:46: &roland_sprites_data[i], bank_offset, false);
+    0000001D DD 6E FF         [19]   76 	ld	l, -1 (ix)
+    00000020 26 00            [ 7]   77 	ld	h, #0x00
+    00000022 29               [11]   78 	add	hl, hl
+    00000023 29               [11]   79 	add	hl, hl
+    00000024 01r00r00         [10]   80 	ld	bc, #_roland_sprites_data
+    00000027 09               [11]   81 	add	hl, bc
+    00000028 D5               [11]   82 	push	de
+    00000029 AF               [ 4]   83 	xor	a, a
+    0000002A F5               [11]   84 	push	af
+    0000002B 33               [ 6]   85 	inc	sp
+    0000002C CDr23r01         [17]   86 	call	_c_expand_sprite_to_bank
+    0000002F D1               [10]   87 	pop	de
+                                     88 ;src/lib/cache.c:47: bank_offset += SPRITE_BYTES;
+    00000030 14               [ 4]   89 	inc	d
+                                     90 ;src/lib/cache.c:44: for (u8 i = 0; i < 4; i++) {
+    00000031 DD 34 FF         [23]   91 	inc	-1 (ix)
+    00000034 18 E0            [12]   92 	jr	00107$
+    00000036                         93 00101$:
+                                     94 ;src/lib/cache.c:51: g_sprite_banks[SPR_BANK_ROLAND_R].offset = bank_offset;
+    00000036 ED 53r03r00      [20]   95 	ld	((_g_sprite_banks + 3)), de
+                                     96 ;src/lib/cache.c:52: g_sprite_banks[SPR_BANK_ROLAND_R].count = 4;
+    0000003A 21r05r00         [10]   97 	ld	hl, #_g_sprite_banks + 5
+    0000003D 36 04            [10]   98 	ld	(hl), #0x04
+                                     99 ;src/lib/cache.c:53: for (u8 i = 0; i < 4; i++) {
+    0000003F 0E 00            [ 7]  100 	ld	c, #0x00
+    00000041                        101 00110$:
+    00000041 79               [ 4]  102 	ld	a, c
+    00000042 D6 04            [ 7]  103 	sub	a, #0x04
+    00000044 30 1C            [12]  104 	jr	NC, 00102$
+                                    105 ;src/lib/cache.c:55: &roland_sprites_data[i], bank_offset, true);
+    00000046 69               [ 4]  106 	ld	l, c
+    00000047 26 00            [ 7]  107 	ld	h, #0x00
+    00000049 29               [11]  108 	add	hl, hl
+    0000004A 29               [11]  109 	add	hl, hl
+    0000004B 7D               [ 4]  110 	ld	a, l
+    0000004C C6r00            [ 7]  111 	add	a, #<(_roland_sprites_data)
+    0000004E 6F               [ 4]  112 	ld	l, a
+    0000004F 7C               [ 4]  113 	ld	a, h
+    00000050 CEs00            [ 7]  114 	adc	a, #>(_roland_sprites_data)
+    00000052 C5               [11]  115 	push	bc
+    00000053 D5               [11]  116 	push	de
+    00000054 26 01            [ 7]  117 	ld	h, #0x01
+    00000056 E5               [11]  118 	push	hl
+    00000057 33               [ 6]  119 	inc	sp
+    00000058 67               [ 4]  120 	ld	h, a
+    00000059 CDr23r01         [17]  121 	call	_c_expand_sprite_to_bank
+    0000005C D1               [10]  122 	pop	de
+    0000005D C1               [10]  123 	pop	bc
+                                    124 ;src/lib/cache.c:56: bank_offset += SPRITE_BYTES;
+    0000005E 14               [ 4]  125 	inc	d
+                                    126 ;src/lib/cache.c:53: for (u8 i = 0; i < 4; i++) {
+    0000005F 0C               [ 4]  127 	inc	c
+    00000060 18 DF            [12]  128 	jr	00110$
+    00000062                        129 00102$:
+                                    130 ;src/lib/cache.c:60: g_sprite_banks[SPR_BANK_MODE_CLASSIC].offset = bank_offset;
+    00000062 ED 53r06r00      [20]  131 	ld	((_g_sprite_banks + 6)), de
+                                    132 ;src/lib/cache.c:61: g_sprite_banks[SPR_BANK_MODE_CLASSIC].count = 4;
+    00000066 21r08r00         [10]  133 	ld	hl, #_g_sprite_banks + 8
+    00000069 36 04            [10]  134 	ld	(hl), #0x04
+                                    135 ;src/lib/cache.c:62: for (u8 i = 0; i < 4; i++) {
+    0000006B 0E 00            [ 7]  136 	ld	c, #0x00
+    0000006D                        137 00113$:
+    0000006D 79               [ 4]  138 	ld	a, c
+    0000006E D6 04            [ 7]  139 	sub	a, #0x04
+    00000070 30 1B            [12]  140 	jr	NC, 00103$
+                                    141 ;src/lib/cache.c:64: &mode_sprites_data[i], bank_offset, false);
+    00000072 69               [ 4]  142 	ld	l, c
+    00000073 26 00            [ 7]  143 	ld	h, #0x00
+    00000075 29               [11]  144 	add	hl, hl
+    00000076 29               [11]  145 	add	hl, hl
+    00000077 7D               [ 4]  146 	ld	a, l
+    00000078 C6r00            [ 7]  147 	add	a, #<(_mode_sprites_data)
+    0000007A 6F               [ 4]  148 	ld	l, a
+    0000007B 7C               [ 4]  149 	ld	a, h
+    0000007C CEs00            [ 7]  150 	adc	a, #>(_mode_sprites_data)
+    0000007E 67               [ 4]  151 	ld	h, a
+    0000007F C5               [11]  152 	push	bc
+    00000080 D5               [11]  153 	push	de
+    00000081 AF               [ 4]  154 	xor	a, a
+    00000082 F5               [11]  155 	push	af
+    00000083 33               [ 6]  156 	inc	sp
+    00000084 CDr23r01         [17]  157 	call	_c_expand_sprite_to_bank
+    00000087 D1               [10]  158 	pop	de
+    00000088 C1               [10]  159 	pop	bc
+                                    160 ;src/lib/cache.c:65: bank_offset += SPRITE_BYTES;
+    00000089 14               [ 4]  161 	inc	d
+                                    162 ;src/lib/cache.c:62: for (u8 i = 0; i < 4; i++) {
+    0000008A 0C               [ 4]  163 	inc	c
+    0000008B 18 E0            [12]  164 	jr	00113$
+    0000008D                        165 00103$:
+                                    166 ;src/lib/cache.c:69: g_sprite_banks[SPR_BANK_MODE_MANIA].offset = bank_offset;
+    0000008D ED 53r09r00      [20]  167 	ld	((_g_sprite_banks + 9)), de
+                                    168 ;src/lib/cache.c:70: g_sprite_banks[SPR_BANK_MODE_MANIA].count = 3;
+    00000091 21r0Br00         [10]  169 	ld	hl, #_g_sprite_banks + 11
+    00000094 36 03            [10]  170 	ld	(hl), #0x03
+                                    171 ;src/lib/cache.c:71: for (u8 i = 0; i < 3; i++) {
+    00000096 0E 00            [ 7]  172 	ld	c, #0x00
+    00000098                        173 00116$:
+                                    174 ;src/lib/cache.c:73: &mode_sprites_data[4 + i], bank_offset, false);
+    00000098 79               [ 4]  175 	ld	a,c
+    00000099 FE 03            [ 7]  176 	cp	a,#0x03
+    0000009B 30 1C            [12]  177 	jr	NC, 00104$
+    0000009D C6 04            [ 7]  178 	add	a, #0x04
+    0000009F 6F               [ 4]  179 	ld	l, a
+    000000A0 07               [ 4]  180 	rlca
+    000000A1 9F               [ 4]  181 	sbc	a, a
+    000000A2 67               [ 4]  182 	ld	h, a
+    000000A3 29               [11]  183 	add	hl, hl
+    000000A4 29               [11]  184 	add	hl, hl
+    000000A5 D5               [11]  185 	push	de
+    000000A6 11r00r00         [10]  186 	ld	de, #_mode_sprites_data
+    000000A9 19               [11]  187 	add	hl, de
+    000000AA D1               [10]  188 	pop	de
+    000000AB C5               [11]  189 	push	bc
+    000000AC D5               [11]  190 	push	de
+    000000AD AF               [ 4]  191 	xor	a, a
+    000000AE F5               [11]  192 	push	af
+    000000AF 33               [ 6]  193 	inc	sp
+    000000B0 CDr23r01         [17]  194 	call	_c_expand_sprite_to_bank
+    000000B3 D1               [10]  195 	pop	de
+    000000B4 C1               [10]  196 	pop	bc
+                                    197 ;src/lib/cache.c:74: bank_offset += SPRITE_BYTES;
+    000000B5 14               [ 4]  198 	inc	d
+                                    199 ;src/lib/cache.c:71: for (u8 i = 0; i < 3; i++) {
+    000000B6 0C               [ 4]  200 	inc	c
+    000000B7 18 DF            [12]  201 	jr	00116$
+    000000B9                        202 00104$:
+                                    203 ;src/lib/cache.c:78: g_sprite_banks[SPR_BANK_MODE_ZEN].offset = bank_offset;
+    000000B9 ED 53r0Cr00      [20]  204 	ld	((_g_sprite_banks + 12)), de
+                                    205 ;src/lib/cache.c:79: g_sprite_banks[SPR_BANK_MODE_ZEN].count = 2;
+    000000BD 21r0Er00         [10]  206 	ld	hl, #_g_sprite_banks + 14
+    000000C0 36 02            [10]  207 	ld	(hl), #0x02
+                                    208 ;src/lib/cache.c:80: for (u8 i = 0; i < 2; i++) {
+    000000C2 0E 00            [ 7]  209 	ld	c, #0x00
+    000000C4                        210 00119$:
+                                    211 ;src/lib/cache.c:82: &mode_sprites_data[7 + i], bank_offset, false);
+    000000C4 79               [ 4]  212 	ld	a,c
+    000000C5 FE 02            [ 7]  213 	cp	a,#0x02
+    000000C7 30 1E            [12]  214 	jr	NC, 00121$
+    000000C9 C6 07            [ 7]  215 	add	a, #0x07
+    000000CB 6F               [ 4]  216 	ld	l, a
+    000000CC 07               [ 4]  217 	rlca
+    000000CD 9F               [ 4]  218 	sbc	a, a
+    000000CE 67               [ 4]  219 	ld	h, a
+    000000CF 29               [11]  220 	add	hl, hl
+    000000D0 29               [11]  221 	add	hl, hl
+    000000D1 3Er00            [ 7]  222 	ld	a, #<(_mode_sprites_data)
+    000000D3 85               [ 4]  223 	add	a, l
+    000000D4 6F               [ 4]  224 	ld	l, a
+    000000D5 3Es00            [ 7]  225 	ld	a, #>(_mode_sprites_data)
+    000000D7 8C               [ 4]  226 	adc	a, h
+    000000D8 67               [ 4]  227 	ld	h, a
+    000000D9 C5               [11]  228 	push	bc
+    000000DA D5               [11]  229 	push	de
+    000000DB AF               [ 4]  230 	xor	a, a
+    000000DC F5               [11]  231 	push	af
+    000000DD 33               [ 6]  232 	inc	sp
+    000000DE CDr23r01         [17]  233 	call	_c_expand_sprite_to_bank
+    000000E1 D1               [10]  234 	pop	de
+    000000E2 C1               [10]  235 	pop	bc
+                                    236 ;src/lib/cache.c:83: bank_offset += SPRITE_BYTES;
+    000000E3 14               [ 4]  237 	inc	d
+                                    238 ;src/lib/cache.c:80: for (u8 i = 0; i < 2; i++) {
+    000000E4 0C               [ 4]  239 	inc	c
+    000000E5 18 DD            [12]  240 	jr	00119$
+    000000E7                        241 00121$:
+                                    242 ;src/lib/cache.c:85: }
+    000000E7 33               [ 6]  243 	inc	sp
+    000000E8 DD E1            [14]  244 	pop	ix
+    000000EA C9               [10]  245 	ret
+    000000EB                        246 _bank_counts:
+    000000EB 04                     247 	.db #0x04	; 4
+    000000EC 04                     248 	.db #0x04	; 4
+    000000ED 04                     249 	.db #0x04	; 4
+    000000EE 03                     250 	.db #0x03	; 3
+    000000EF 02                     251 	.db #0x02	; 2
+                                    252 ;src/lib/cache.c:87: void c_sprite_cache_bank_upload(
+                                    253 ;	---------------------------------
+                                    254 ; Function c_sprite_cache_bank_upload
+                                    255 ; ---------------------------------
+    000000F0                        256 _c_sprite_cache_bank_upload::
+    000000F0 DD E5            [15]  257 	push	ix
+    000000F2 DD 21 00 00      [14]  258 	ld	ix,#0
+    000000F6 DD 39            [15]  259 	add	ix,sp
+    000000F8 5F               [ 4]  260 	ld	e, a
+    000000F9 4D               [ 4]  261 	ld	c, l
+                                    262 ;src/lib/cache.c:90: const sprite_bank_desc_t *b = &g_sprite_banks[bank];
+    000000FA 16 00            [ 7]  263 	ld	d, #0x00
+    000000FC 6B               [ 4]  264 	ld	l, e
+    000000FD 62               [ 4]  265 	ld	h, d
+    000000FE 29               [11]  266 	add	hl, hl
+    000000FF 19               [11]  267 	add	hl, de
+    00000100 11r00r00         [10]  268 	ld	de, #_g_sprite_banks
+    00000103 19               [11]  269 	add	hl, de
+                                    270 ;src/lib/cache.c:92: if (index >= b->count)
+    00000104 5D               [ 4]  271 	ld	e, l
+    00000105 54               [ 4]  272 	ld	d, h
+    00000106 23               [ 6]  273 	inc	hl
+    00000107 23               [ 6]  274 	inc	hl
+    00000108 46               [ 7]  275 	ld	b, (hl)
+    00000109 79               [ 4]  276 	ld	a, c
+    0000010A 90               [ 4]  277 	sub	a, b
+                                    278 ;src/lib/cache.c:93: return;
+    0000010B 30 11            [12]  279 	jr	NC, 00103$
+                                    280 ;src/lib/cache.c:95: u16 offset = b->offset + (index * SPRITE_BYTES);
+    0000010D EB               [ 4]  281 	ex	de,hl
+    0000010E 5E               [ 7]  282 	ld	e, (hl)
+    0000010F 23               [ 6]  283 	inc	hl
+    00000110 56               [ 7]  284 	ld	d, (hl)
+    00000111 AF               [ 4]  285 	xor	a, a
+    00000112 61               [ 4]  286 	ld	h, c
+    00000113 2E 00            [ 7]  287 	ld	l, #0x00
+    00000115 19               [11]  288 	add	hl, de
+                                    289 ;src/lib/cache.c:97: c_fetch_sprite_from_bank_and_upload(offset, hw_id);
+    00000116 DD 7E 04         [19]  290 	ld	a, 4 (ix)
+    00000119 F5               [11]  291 	push	af
+    0000011A 33               [ 6]  292 	inc	sp
+    0000011B CDr78r01         [17]  293 	call	_c_fetch_sprite_from_bank_and_upload
+    0000011E                        294 00103$:
+                                    295 ;src/lib/cache.c:98: }
+    0000011E DD E1            [14]  296 	pop	ix
+    00000120 E1               [10]  297 	pop	hl
+    00000121 33               [ 6]  298 	inc	sp
+    00000122 E9               [ 4]  299 	jp	(hl)
+                                    300 ;src/lib/cache.c:101: static void c_expand_sprite_to_bank(const sprite_data_t *src,
+                                    301 ;	---------------------------------
+                                    302 ; Function c_expand_sprite_to_bank
+                                    303 ; ---------------------------------
+    00000123                        304 _c_expand_sprite_to_bank:
+    00000123 DD E5            [15]  305 	push	ix
+    00000125 DD 21 00 00      [14]  306 	ld	ix,#0
+    00000129 DD 39            [15]  307 	add	ix,sp
+    0000012B D5               [11]  308 	push	de
+                                    309 ;src/lib/cache.c:105: a_page_disconnect_safe();
+    0000012C E5               [11]  310 	push	hl
+    0000012D CDr00r00         [17]  311 	call	_a_page_disconnect_safe
+                                    312 ;src/lib/cache.c:109: cpct_memset(HW_SPRITE_BUFFER, 0, SPRITE_BYTES);
+    00000130 11 00 01         [10]  313 	ld	de, #0x0100
+    00000133 D5               [11]  314 	push	de
+    00000134 AF               [ 4]  315 	xor	a, a
+    00000135 F5               [11]  316 	push	af
+    00000136 33               [ 6]  317 	inc	sp
+    00000137 21 00 BF         [10]  318 	ld	hl, #0xbf00
+    0000013A CDr00r00         [17]  319 	call	_cpct_memset
+    0000013D E1               [10]  320 	pop	hl
+                                    321 ;src/lib/cache.c:110: cpct_zx7b_decrunch_s(buf_end, src->end);
+    0000013E 23               [ 6]  322 	inc	hl
+    0000013F 23               [ 6]  323 	inc	hl
+    00000140 5E               [ 7]  324 	ld	e, (hl)
+    00000141 23               [ 6]  325 	inc	hl
+    00000142 56               [ 7]  326 	ld	d, (hl)
+    00000143 21 FF BF         [10]  327 	ld	hl, #0xbfff
+    00000146 CDr00r00         [17]  328 	call	_cpct_zx7b_decrunch_s
+                                    329 ;src/lib/cache.c:113: if (flip_horizontal)
+    00000149 DD CB 04 46      [20]  330 	bit	0, 4 (ix)
+    0000014D 28 06            [12]  331 	jr	Z, 00102$
+                                    332 ;src/lib/cache.c:114: a_sprite_flip_horizontal_inplace(HW_SPRITE_BUFFER);
+    0000014F 21 00 BF         [10]  333 	ld	hl, #0xbf00
+    00000152 CDr00r00         [17]  334 	call	_a_sprite_flip_horizontal_inplace
+    00000155                        335 00102$:
+                                    336 ;src/lib/cache.c:117: cpct_pageMemory(RAMCFG_6 | BANK_0);
+    00000155 2E 06            [ 7]  337 	ld	l, #0x06
+    00000157 CDr00r00         [17]  338 	call	_cpct_pageMemory
+                                    339 ;src/lib/cache.c:120: cpct_memcpy((u8 *)(SPRITE_BANK_BASE + bank_offset), HW_SPRITE_BUFFER,
+    0000015A E1               [10]  340 	pop	hl
+    0000015B E5               [11]  341 	push	hl
+    0000015C 11 01 40         [10]  342 	ld	de, #0x4001
+    0000015F 19               [11]  343 	add	hl, de
+    00000160 11 00 01         [10]  344 	ld	de, #0x0100
+    00000163 D5               [11]  345 	push	de
+    00000164 11 00 BF         [10]  346 	ld	de, #0xbf00
+    00000167 CDr00r00         [17]  347 	call	_cpct_memcpy
+                                    348 ;src/lib/cache.c:124: cpct_pageMemory(RAMCFG_0 | BANK_0);
+    0000016A 2E 00            [ 7]  349 	ld	l, #0x00
+    0000016C CDr00r00         [17]  350 	call	_cpct_pageMemory
+                                    351 ;src/lib/cache.c:127: a_page_connect_safe();
+    0000016F CDr00r00         [17]  352 	call	_a_page_connect_safe
+                                    353 ;src/lib/cache.c:128: }
+    00000172 F1               [10]  354 	pop	af
+    00000173 DD E1            [14]  355 	pop	ix
+    00000175 E1               [10]  356 	pop	hl
+    00000176 33               [ 6]  357 	inc	sp
+    00000177 E9               [ 4]  358 	jp	(hl)
+                                    359 ;src/lib/cache.c:131: static void c_fetch_sprite_from_bank_and_upload(
+                                    360 ;	---------------------------------
+                                    361 ; Function c_fetch_sprite_from_bank_and_upload
+                                    362 ; ---------------------------------
+    00000178                        363 _c_fetch_sprite_from_bank_and_upload:
+                                    364 ;src/lib/cache.c:135: a_page_disconnect_safe();
+    00000178 E5               [11]  365 	push	hl
+    00000179 CDr00r00         [17]  366 	call	_a_page_disconnect_safe
+                                    367 ;src/lib/cache.c:138: cpct_pageMemory(RAMCFG_6 | BANK_0);
+    0000017C 2E 06            [ 7]  368 	ld	l, #0x06
+    0000017E CDr00r00         [17]  369 	call	_cpct_pageMemory
+                                    370 ;src/lib/cache.c:141: cpct_memset(HW_SPRITE_BUFFER, 0, SPRITE_BYTES);
+    00000181 11 00 01         [10]  371 	ld	de, #0x0100
+    00000184 D5               [11]  372 	push	de
+    00000185 AF               [ 4]  373 	xor	a, a
+    00000186 F5               [11]  374 	push	af
+    00000187 33               [ 6]  375 	inc	sp
+    00000188 21 00 BF         [10]  376 	ld	hl, #0xbf00
+    0000018B CDr00r00         [17]  377 	call	_cpct_memset
+    0000018E E1               [10]  378 	pop	hl
+                                    379 ;src/lib/cache.c:142: cpct_memcpy(HW_SPRITE_BUFFER, (u8 *)(SPRITE_BANK_BASE + bank_offset),
+    0000018F 01 01 40         [10]  380 	ld	bc, #0x4001
+    00000192 09               [11]  381 	add	hl, bc
+    00000193 11 00 01         [10]  382 	ld	de, #0x0100
+    00000196 EB               [ 4]  383 	ex	de, hl
+    00000197 E5               [11]  384 	push	hl
+    00000198 21 00 BF         [10]  385 	ld	hl, #0xbf00
+    0000019B CDr00r00         [17]  386 	call	_cpct_memcpy
+                                    387 ;src/lib/cache.c:146: cpct_pageMemory(RAMCFG_0 | BANK_0);
+    0000019E 2E 00            [ 7]  388 	ld	l, #0x00
+    000001A0 CDr00r00         [17]  389 	call	_cpct_pageMemory
+                                    390 ;src/lib/cache.c:149: a_page_connect_safe();
+    000001A3 CDr00r00         [17]  391 	call	_a_page_connect_safe
+                                    392 ;src/lib/cache.c:152: cpct_asicCopySpriteData(hw_id, HW_SPRITE_BUFFER);
+    000001A6 FD 21 02 00      [14]  393 	ld	iy, #2
+    000001AA FD 39            [15]  394 	add	iy, sp
+    000001AC FD 6E 00         [19]  395 	ld	l, 0 (iy)
+    000001AF 26 00            [ 7]  396 	ld	h, #0x00
+    000001B1 11 00 BF         [10]  397 	ld	de, #0xbf00
+    000001B4 CDr00r00         [17]  398 	call	_cpct_asicCopySpriteData
+                                    399 ;src/lib/cache.c:153: }
+    000001B7 E1               [10]  400 	pop	hl
+    000001B8 33               [ 6]  401 	inc	sp
+    000001B9 E9               [ 4]  402 	jp	(hl)
+                                    403 	.area _CODE
+                                    404 	.area _INITIALIZER
+                                    405 	.area _CABS (ABS)

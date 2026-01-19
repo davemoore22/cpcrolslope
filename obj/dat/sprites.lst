@@ -1,0 +1,374 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module sprites
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _cpctelera_sprites_palette
+                                     12 	.globl _mode_sprites_palette
+                                     13 	.globl _titles_sprites_palette_mania
+                                     14 	.globl _titles_sprites_palette_zen
+                                     15 	.globl _titles_sprites_palette_classic
+                                     16 	.globl _ghost_sprites_palette
+                                     17 	.globl _spider_sprites_palette
+                                     18 	.globl _snowball_sprites_palette
+                                     19 	.globl _roland_sprites_palette
+                                     20 	.globl _cpctelera_sprites_data
+                                     21 	.globl _mode_sprites_data
+                                     22 	.globl _titles_sprites_data
+                                     23 	.globl _ghost_sprites_data
+                                     24 	.globl _spider_sprites_data
+                                     25 	.globl _snowball_sprites_data
+                                     26 	.globl _roland_sprites_data
+                                     27 ;--------------------------------------------------------
+                                     28 ; special function registers
+                                     29 ;--------------------------------------------------------
+                                     30 ;--------------------------------------------------------
+                                     31 ; ram data
+                                     32 ;--------------------------------------------------------
+                                     33 	.area _DATA
+                                     34 ;--------------------------------------------------------
+                                     35 ; ram data
+                                     36 ;--------------------------------------------------------
+                                     37 	.area _INITIALIZED
+                                     38 ;--------------------------------------------------------
+                                     39 ; absolute external ram data
+                                     40 ;--------------------------------------------------------
+                                     41 	.area _DABS (ABS)
+                                     42 ;--------------------------------------------------------
+                                     43 ; global & static initialisations
+                                     44 ;--------------------------------------------------------
+                                     45 	.area _HOME
+                                     46 	.area _GSINIT
+                                     47 	.area _GSFINAL
+                                     48 	.area _GSINIT
+                                     49 ;--------------------------------------------------------
+                                     50 ; Home
+                                     51 ;--------------------------------------------------------
+                                     52 	.area _HOME
+                                     53 	.area _HOME
+                                     54 ;--------------------------------------------------------
+                                     55 ; code
+                                     56 ;--------------------------------------------------------
+                                     57 	.area _DATA
+                                     58 	.area _DATA
+    00000000                         59 _roland_sprites_data:
+    00000000r00r00                   60 	.dw _roland_0
+    00000002r78r00                   61 	.dw (_roland_0 + 120)
+    00000004r00r00                   62 	.dw _roland_1
+    00000006r64r00                   63 	.dw (_roland_1 + 100)
+    00000008r00r00                   64 	.dw _roland_2
+    0000000Ar75r00                   65 	.dw (_roland_2 + 117)
+    0000000Cr00r00                   66 	.dw _roland_3
+    0000000Er49r00                   67 	.dw (_roland_3 + 73)
+    00000010                         68 _snowball_sprites_data:
+    00000010r00r00                   69 	.dw _snowball_0
+    00000012r3Cr00                   70 	.dw (_snowball_0 + 60)
+    00000014r00r00                   71 	.dw _snowball_1
+    00000016r4Ar00                   72 	.dw (_snowball_1 + 74)
+    00000018r00r00                   73 	.dw _snowball_2
+    0000001Ar55r00                   74 	.dw (_snowball_2 + 85)
+    0000001Cr00r00                   75 	.dw _snowball_3
+    0000001Er57r00                   76 	.dw (_snowball_3 + 87)
+    00000020r00r00                   77 	.dw _snowball_4
+    00000022r55r00                   78 	.dw (_snowball_4 + 85)
+    00000024r00r00                   79 	.dw _snowball_5
+    00000026r3Dr00                   80 	.dw (_snowball_5 + 61)
+    00000028r00r00                   81 	.dw _snowball_6
+    0000002Ar41r00                   82 	.dw (_snowball_6 + 65)
+    0000002Cr00r00                   83 	.dw _snowball_7
+    0000002Er42r00                   84 	.dw (_snowball_7 + 66)
+    00000030r00r00                   85 	.dw _snowball_8
+    00000032r4Ar00                   86 	.dw (_snowball_8 + 74)
+    00000034r00r00                   87 	.dw _snowball_9
+    00000036r53r00                   88 	.dw (_snowball_9 + 83)
+    00000038r00r00                   89 	.dw _snowball_10
+    0000003Ar40r00                   90 	.dw (_snowball_10 + 64)
+    0000003Cr00r00                   91 	.dw _snowball_11
+    0000003Er3Er00                   92 	.dw (_snowball_11 + 62)
+    00000040r00r00                   93 	.dw _snowball_12
+    00000042r4Fr00                   94 	.dw (_snowball_12 + 79)
+    00000044r00r00                   95 	.dw _snowball_13
+    00000046r43r00                   96 	.dw (_snowball_13 + 67)
+    00000048r00r00                   97 	.dw _snowball_14
+    0000004Ar53r00                   98 	.dw (_snowball_14 + 83)
+    0000004Cr00r00                   99 	.dw _snowball_15
+    0000004Er4Fr00                  100 	.dw (_snowball_15 + 79)
+    00000050                        101 _spider_sprites_data:
+    00000050r00r00                  102 	.dw _spider_0
+    00000052r37r00                  103 	.dw (_spider_0 + 55)
+    00000054r00r00                  104 	.dw _spider_1
+    00000056r37r00                  105 	.dw (_spider_1 + 55)
+    00000058r00r00                  106 	.dw _spider_2
+    0000005Ar37r00                  107 	.dw (_spider_2 + 55)
+    0000005Cr00r00                  108 	.dw _spider_3
+    0000005Er2Fr00                  109 	.dw (_spider_3 + 47)
+    00000060r00r00                  110 	.dw _spider_4
+    00000062r30r00                  111 	.dw (_spider_4 + 48)
+    00000064r00r00                  112 	.dw _spider_5
+    00000066r2Ar00                  113 	.dw (_spider_5 + 42)
+    00000068r00r00                  114 	.dw _spider_6
+    0000006Ar44r00                  115 	.dw (_spider_6 + 68)
+    0000006Cr00r00                  116 	.dw _spider_7
+    0000006Er4Er00                  117 	.dw (_spider_7 + 78)
+    00000070r00r00                  118 	.dw _spider_8
+    00000072r50r00                  119 	.dw (_spider_8 + 80)
+    00000074r00r00                  120 	.dw _spider_9
+    00000076r51r00                  121 	.dw (_spider_9 + 81)
+    00000078r00r00                  122 	.dw _spider_10
+    0000007Ar49r00                  123 	.dw (_spider_10 + 73)
+    0000007Cr00r00                  124 	.dw _spider_11
+    0000007Er53r00                  125 	.dw (_spider_11 + 83)
+    00000080                        126 _ghost_sprites_data:
+    00000080r00r00                  127 	.dw _ghost_0
+    00000082r05r00                  128 	.dw (_ghost_0 + 5)
+    00000084r00r00                  129 	.dw _ghost_1
+    00000086r2Fr00                  130 	.dw (_ghost_1 + 47)
+    00000088r00r00                  131 	.dw _ghost_2
+    0000008Ar31r00                  132 	.dw (_ghost_2 + 49)
+    0000008Cr00r00                  133 	.dw _ghost_3
+    0000008Er25r00                  134 	.dw (_ghost_3 + 37)
+    00000090r00r00                  135 	.dw _ghost_4
+    00000092r24r00                  136 	.dw (_ghost_4 + 36)
+    00000094r00r00                  137 	.dw _ghost_5
+    00000096r39r00                  138 	.dw (_ghost_5 + 57)
+    00000098r00r00                  139 	.dw _ghost_6
+    0000009Ar55r00                  140 	.dw (_ghost_6 + 85)
+    0000009Cr00r00                  141 	.dw _ghost_7
+    0000009Er66r00                  142 	.dw (_ghost_7 + 102)
+    000000A0r00r00                  143 	.dw _ghost_8
+    000000A2r34r00                  144 	.dw (_ghost_8 + 52)
+    000000A4                        145 _titles_sprites_data:
+    000000A4r00r00                  146 	.dw _roland_0
+    000000A6r78r00                  147 	.dw (_roland_0 + 120)
+    000000A8r00r00                  148 	.dw _roland_1
+    000000AAr64r00                  149 	.dw (_roland_1 + 100)
+    000000ACr00r00                  150 	.dw _roland_2
+    000000AEr75r00                  151 	.dw (_roland_2 + 117)
+    000000B0r00r00                  152 	.dw _roland_3
+    000000B2r49r00                  153 	.dw (_roland_3 + 73)
+    000000B4r00r00                  154 	.dw _controls_0
+    000000B6r48r00                  155 	.dw (_controls_0 + 72)
+    000000B8r00r00                  156 	.dw _controls_1
+    000000BAr49r00                  157 	.dw (_controls_1 + 73)
+    000000BCr00r00                  158 	.dw _controls_2
+    000000BEr4Er00                  159 	.dw (_controls_2 + 78)
+    000000C0r00r00                  160 	.dw _controls_3
+    000000C2r4Cr00                  161 	.dw (_controls_3 + 76)
+    000000C4r00r00                  162 	.dw _play_0
+    000000C6r47r00                  163 	.dw (_play_0 + 71)
+    000000C8r00r00                  164 	.dw _play_1
+    000000CAr3Fr00                  165 	.dw (_play_1 + 63)
+    000000CCr00r00                  166 	.dw _play_2
+    000000CEr11r00                  167 	.dw (_play_2 + 17)
+    000000D0                        168 _mode_sprites_data:
+    000000D0r00r00                  169 	.dw _mode_0
+    000000D2r48r00                  170 	.dw (_mode_0 + 72)
+    000000D4r00r00                  171 	.dw _mode_1
+    000000D6r4Er00                  172 	.dw (_mode_1 + 78)
+    000000D8r00r00                  173 	.dw _mode_2
+    000000DAr4Er00                  174 	.dw (_mode_2 + 78)
+    000000DCr00r00                  175 	.dw _mode_3
+    000000DEr3Br00                  176 	.dw (_mode_3 + 59)
+    000000E0r00r00                  177 	.dw _mode_4
+    000000E2r46r00                  178 	.dw (_mode_4 + 70)
+    000000E4r00r00                  179 	.dw _mode_5
+    000000E6r46r00                  180 	.dw (_mode_5 + 70)
+    000000E8r00r00                  181 	.dw _mode_6
+    000000EAr32r00                  182 	.dw (_mode_6 + 50)
+    000000ECr00r00                  183 	.dw _mode_7
+    000000EEr46r00                  184 	.dw (_mode_7 + 70)
+    000000F0r00r00                  185 	.dw _mode_8
+    000000F2r3Ar00                  186 	.dw (_mode_8 + 58)
+    000000F4                        187 _cpctelera_sprites_data:
+    000000F4r00r00                  188 	.dw _cpctelera_0
+    000000F6r09r00                  189 	.dw (_cpctelera_0 + 9)
+    000000F8r00r00                  190 	.dw _cpctelera_1
+    000000FAr28r00                  191 	.dw (_cpctelera_1 + 40)
+    000000FCr00r00                  192 	.dw _cpctelera_2
+    000000FEr60r00                  193 	.dw (_cpctelera_2 + 96)
+    00000100r00r00                  194 	.dw _cpctelera_3
+    00000102r22r00                  195 	.dw (_cpctelera_3 + 34)
+    00000104r00r00                  196 	.dw _cpctelera_4
+    00000106r75r00                  197 	.dw (_cpctelera_4 + 117)
+    00000108r00r00                  198 	.dw _cpctelera_5
+    0000010Ar80r00                  199 	.dw (_cpctelera_5 + 128)
+    0000010Cr00r00                  200 	.dw _cpctelera_6
+    0000010Er5Ar00                  201 	.dw (_cpctelera_6 + 90)
+    00000110r00r00                  202 	.dw _cpctelera_7
+    00000112r43r00                  203 	.dw (_cpctelera_7 + 67)
+    00000114r00r00                  204 	.dw _cpctelera_8
+    00000116r2Fr00                  205 	.dw (_cpctelera_8 + 47)
+    00000118r00r00                  206 	.dw _cpctelera_9
+    0000011Ar58r00                  207 	.dw (_cpctelera_9 + 88)
+    0000011Cr00r00                  208 	.dw _cpctelera_10
+    0000011Er5Fr00                  209 	.dw (_cpctelera_10 + 95)
+    00000120r00r00                  210 	.dw _cpctelera_11
+    00000122r07r00                  211 	.dw (_cpctelera_11 + 7)
+    00000124r00r00                  212 	.dw _cpctelera_12
+    00000126r05r00                  213 	.dw (_cpctelera_12 + 5)
+    00000128r00r00                  214 	.dw _cpctelera_13
+    0000012Ar1Fr00                  215 	.dw (_cpctelera_13 + 31)
+    0000012Cr00r00                  216 	.dw _cpctelera_14
+    0000012Er25r00                  217 	.dw (_cpctelera_14 + 37)
+    00000130r00r00                  218 	.dw _cpctelera_15
+    00000132r05r00                  219 	.dw (_cpctelera_15 + 5)
+    00000134                        220 _roland_sprites_palette:
+    00000134 FF 0F                  221 	.dw #0x0fff
+    00000136 13 01                  222 	.dw #0x0113
+    00000138 42 01                  223 	.dw #0x0142
+    0000013A 27 03                  224 	.dw #0x0327
+    0000013C F0 04                  225 	.dw #0x04f0
+    0000013E F0 08                  226 	.dw #0x08f0
+    00000140 80 00                  227 	.dw #0x0080
+    00000142 F0 0A                  228 	.dw #0x0af0
+    00000144 2A 05                  229 	.dw #0x052a
+    00000146 57 05                  230 	.dw #0x0557
+    00000148 F0 0C                  231 	.dw #0x0cf0
+    0000014A 2D 08                  232 	.dw #0x082d
+    0000014C F0 0D                  233 	.dw #0x0df0
+    0000014E 79 08                  234 	.dw #0x0879
+    00000150 3F 0B                  235 	.dw #0x0b3f
+    00000152 AF 0E                  236 	.dw #0x0eaf
+    00000154                        237 _snowball_sprites_palette:
+    00000154 FF 0F                  238 	.dw #0x0fff
+    00000156 57 03                  239 	.dw #0x0357
+    00000158 57 03                  240 	.dw #0x0357
+    0000015A 57 03                  241 	.dw #0x0357
+    0000015C 8C 07                  242 	.dw #0x078c
+    0000015E 8C 07                  243 	.dw #0x078c
+    00000160 BF 0B                  244 	.dw #0x0bbf
+    00000162 BF 0B                  245 	.dw #0x0bbf
+    00000164 AF 0B                  246 	.dw #0x0baf
+    00000166 DF 0D                  247 	.dw #0x0ddf
+    00000168 EF 0E                  248 	.dw #0x0eef
+    0000016A 0C 05                  249 	.dw #0x050c
+    0000016C 00 00                  250 	.dw #0x0000
+    0000016E 00 00                  251 	.dw #0x0000
+    00000170 D3 0D                  252 	.dw #0x0dd3
+    00000172 0C 05                  253 	.dw #0x050c
+    00000174                        254 _spider_sprites_palette:
+    00000174 FF 0F                  255 	.dw #0x0fff
+    00000176 01 00                  256 	.dw #0x0001
+    00000178 4C 05                  257 	.dw #0x054c
+    0000017A F6 06                  258 	.dw #0x06f6
+    0000017C 7D 08                  259 	.dw #0x087d
+    0000017E 4D 0B                  260 	.dw #0x0b4d
+    00000180 8E 0C                  261 	.dw #0x0c8e
+    00000182 9A 0F                  262 	.dw #0x0f9a
+    00000184 DE 0D                  263 	.dw #0x0dde
+    00000186 00 00                  264 	.dw #0x0000
+    00000188 EA 0B                  265 	.dw #0x0bea
+    0000018A 0B 05                  266 	.dw #0x050b
+    0000018C 00 00                  267 	.dw #0x0000
+    0000018E 00 00                  268 	.dw #0x0000
+    00000190 00 00                  269 	.dw #0x0000
+    00000192 00 00                  270 	.dw #0x0000
+    00000194                        271 _ghost_sprites_palette:
+    00000194 FF 0F                  272 	.dw #0x0fff
+    00000196 C0 09                  273 	.dw #0x09c0
+    00000198 39 0B                  274 	.dw #0x0b39
+    0000019A 4A 0C                  275 	.dw #0x0c4a
+    0000019C 5B 0D                  276 	.dw #0x0d5b
+    0000019E 8D 0E                  277 	.dw #0x0e8d
+    000001A0 F0 0D                  278 	.dw #0x0df0
+    000001A2 AE 0F                  279 	.dw #0x0fae
+    000001A4 CE 0F                  280 	.dw #0x0fce
+    000001A6 00 00                  281 	.dw #0x0000
+    000001A8 00 00                  282 	.dw #0x0000
+    000001AA 00 00                  283 	.dw #0x0000
+    000001AC 00 00                  284 	.dw #0x0000
+    000001AE 00 00                  285 	.dw #0x0000
+    000001B0 00 00                  286 	.dw #0x0000
+    000001B2 00 00                  287 	.dw #0x0000
+    000001B4                        288 _titles_sprites_palette_classic:
+    000001B4 FF 0F                  289 	.dw #0x0fff
+    000001B6 13 01                  290 	.dw #0x0113
+    000001B8 42 01                  291 	.dw #0x0142
+    000001BA 27 03                  292 	.dw #0x0327
+    000001BC F0 04                  293 	.dw #0x04f0
+    000001BE F0 08                  294 	.dw #0x08f0
+    000001C0 BF 0F                  295 	.dw #0x0fbf
+    000001C2 F0 0A                  296 	.dw #0x0af0
+    000001C4 EF 0F                  297 	.dw #0x0fef
+    000001C6 57 05                  298 	.dw #0x0557
+    000001C8 F0 0C                  299 	.dw #0x0cf0
+    000001CA 2D 08                  300 	.dw #0x082d
+    000001CC F0 0D                  301 	.dw #0x0df0
+    000001CE 79 08                  302 	.dw #0x0879
+    000001D0 3F 0B                  303 	.dw #0x0b3f
+    000001D2 AF 0E                  304 	.dw #0x0eaf
+    000001D4                        305 _titles_sprites_palette_zen:
+    000001D4 FF 0F                  306 	.dw #0x0fff
+    000001D6 13 01                  307 	.dw #0x0113
+    000001D8 06 06                  308 	.dw #0x0606
+    000001DA 27 03                  309 	.dw #0x0327
+    000001DC 08 08                  310 	.dw #0x0808
+    000001DE 0A 0A                  311 	.dw #0x0a0a
+    000001E0 BF 0F                  312 	.dw #0x0fbf
+    000001E2 0C 0C                  313 	.dw #0x0c0c
+    000001E4 EF 0F                  314 	.dw #0x0fef
+    000001E6 57 05                  315 	.dw #0x0557
+    000001E8 0D 0D                  316 	.dw #0x0d0d
+    000001EA 2D 08                  317 	.dw #0x082d
+    000001EC 0F 0F                  318 	.dw #0x0f0f
+    000001EE 79 08                  319 	.dw #0x0879
+    000001F0 3F 0B                  320 	.dw #0x0b3f
+    000001F2 AF 0E                  321 	.dw #0x0eaf
+    000001F4                        322 _titles_sprites_palette_mania:
+    000001F4 FF 0F                  323 	.dw #0x0fff
+    000001F6 13 01                  324 	.dw #0x0113
+    000001F8 55 00                  325 	.dw #0x0055
+    000001FA 27 03                  326 	.dw #0x0327
+    000001FC 77 00                  327 	.dw #0x0077
+    000001FE 99 00                  328 	.dw #0x0099
+    00000200 BF 0F                  329 	.dw #0x0fbf
+    00000202 BB 00                  330 	.dw #0x00bb
+    00000204 EF 0F                  331 	.dw #0x0fef
+    00000206 57 05                  332 	.dw #0x0557
+    00000208 DD 00                  333 	.dw #0x00dd
+    0000020A 2D 08                  334 	.dw #0x082d
+    0000020C FF 00                  335 	.dw #0x00ff
+    0000020E 79 08                  336 	.dw #0x0879
+    00000210 3F 0B                  337 	.dw #0x0b3f
+    00000212 AF 0E                  338 	.dw #0x0eaf
+    00000214                        339 _mode_sprites_palette:
+    00000214 FF 0F                  340 	.dw #0x0fff
+    00000216 13 01                  341 	.dw #0x0113
+    00000218 42 01                  342 	.dw #0x0142
+    0000021A 27 03                  343 	.dw #0x0327
+    0000021C F0 04                  344 	.dw #0x04f0
+    0000021E F0 08                  345 	.dw #0x08f0
+    00000220 BF 0F                  346 	.dw #0x0fbf
+    00000222 F0 0A                  347 	.dw #0x0af0
+    00000224 EF 0F                  348 	.dw #0x0fef
+    00000226 57 05                  349 	.dw #0x0557
+    00000228 F0 0C                  350 	.dw #0x0cf0
+    0000022A 2D 08                  351 	.dw #0x082d
+    0000022C F0 0D                  352 	.dw #0x0df0
+    0000022E 79 08                  353 	.dw #0x0879
+    00000230 3F 0B                  354 	.dw #0x0b3f
+    00000232 AF 0E                  355 	.dw #0x0eaf
+    00000234                        356 _cpctelera_sprites_palette:
+    00000234 FF 0F                  357 	.dw #0x0fff
+    00000236 00 00                  358 	.dw #0x0000
+    00000238 11 01                  359 	.dw #0x0111
+    0000023A 22 02                  360 	.dw #0x0222
+    0000023C 94 02                  361 	.dw #0x0294
+    0000023E 41 04                  362 	.dw #0x0441
+    00000240 55 05                  363 	.dw #0x0555
+    00000242 87 08                  364 	.dw #0x0887
+    00000244 99 09                  365 	.dw #0x0999
+    00000246 CC 0C                  366 	.dw #0x0ccc
+    00000248 D2 0E                  367 	.dw #0x0ed2
+    0000024A F1 0D                  368 	.dw #0x0df1
+    0000024C F7 0D                  369 	.dw #0x0df7
+    0000024E EE 0E                  370 	.dw #0x0eee
+    00000250 FA 0F                  371 	.dw #0x0ffa
+    00000252 FD 0F                  372 	.dw #0x0ffd
+                                    373 	.area _INITIALIZER
+                                    374 	.area _CABS (ABS)

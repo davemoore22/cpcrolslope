@@ -1,0 +1,21 @@
+XL4
+H 2 areas 11 global symbols
+S _roland_0_end Ref00000000
+S _roland_1_end Ref00000000
+S _roland_2_end Ref00000000
+S _roland_3_end Ref00000000
+S _roland_0_size Def00000100
+S _roland_1_size Def00000100
+S _roland_2_size Def00000100
+S _roland_3_size Def00000100
+S .__.ABS. Def00000000
+S _roland_0_size_z Def00000079
+S _roland_1_size_z Def00000065
+S _roland_2_size_z Def00000076
+S _roland_3_size_z Def0000004A
+S _roland_0 Ref00000000
+S _roland_1 Ref00000000
+S _roland_2 Ref00000000
+S _roland_3 Ref00000000
+A _CODE size 0 flags 0 addr 0
+A SPRITES size 0 flags 0 addr 0

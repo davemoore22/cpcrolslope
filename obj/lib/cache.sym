@@ -1,0 +1,42 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    ___sdcc_enter_ix                                                ******** GX
+    _a_page_connect_safe                                            ******** GX
+    _a_page_disconnect_safe                                         ******** GX
+    _a_sprite_flip_horizontal_inplace                               ******** GX
+  0 _bank_counts                                                    000000EB R
+  0 _c_expand_sprite_to_bank                                        00000123 R
+  0 _c_fetch_sprite_from_bank_and_upload                            00000178 R
+  0 _c_sprite_cache_bank_init                                       00000000 GR
+  0 _c_sprite_cache_bank_upload                                     000000F0 GR
+    _cpct_asicCopySpriteData                                        ******** GX
+    _cpct_memcpy                                                    ******** GX
+    _cpct_memset                                                    ******** GX
+    _cpct_pageMemory                                                ******** GX
+    _cpct_zx7b_decrunch_s                                           ******** GX
+  1 _g_sprite_banks                                                 00000000 GR
+    _mode_sprites_data                                              ******** GX
+    _roland_sprites_data                                            ******** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size      1BA   flags    0
+   1 _DATA                                      size        F   flags    0
+   2 _INITIALIZED                               size        0   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        0   flags    0
+   8 _CABS                                      size        0   flags    8
+

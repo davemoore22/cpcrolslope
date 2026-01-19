@@ -1,0 +1,24 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |     BANK_0  =   000000C0     |     BANK_1  =   000000C4 
+    BANK_2  =   000000C5     |     BANK_3  =   000000C6     |     BANK_4  =   000000C7 
+    BANK_5  =   000000CC     |     BANK_6  =   000000CD     |     BANK_7  =   000000CE 
+    BANK_8  =   000000CF     |     BANK_BAS=   00004000     |   0 BankSwit    000000AF R
+  0 BankSwit    000000A2 R   |   0 Bank_Fai    00000054 R   |   0 Bank_Swi    000000A4 R
+  0 Bank_Tes    00000031 R   |   0 Bank_Tes    00000056 R   |   0 CpcPlus_    000000B5 R
+  0 CpcPlus_    000000AF R   |   0 Initiali    000000BB R   |   0 Plus_Fai    000000A0 R
+  0 Plus_Ini    000000C3 R   |   0 Plus_Ini    000000CB R   |   0 Restore_    000000DC R
+  0 Test_For    00000080 R   |   0 Test_Mem    0000000E R   |   0 _h_get_d    00000000 GR
+  0 h_get_de    00000000 R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size       EB   flags    0
+

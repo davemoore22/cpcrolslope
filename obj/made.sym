@@ -1,0 +1,66 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+  0 ___str_0                                                        00000099 R
+  7 __xinit__m_frame_c                                              00000001 R
+  7 __xinit__m_int_idx                                              00000000 R
+    _a_clear_sprites                                                ******** GX
+    _a_load_cpctelera_sprites                                       ******** GX
+    _a_page_connect_safe                                            ******** GX
+    _a_page_disconnect_safe                                         ******** GX
+    _a_set_hardware_sprite_palette                                  ******** GX
+    _cpct_asicRemoveLinesInterruptHandler                           ******** GX
+    _cpct_asicSetBorder                                             ******** GX
+    _cpct_asicSetLinesInterruptHandler                              ******** GX
+    _cpct_asicSetPalette                                            ******** GX
+    _cpct_scanKeyboard_if                                           ******** GX
+    _cpct_waitVSYNC                                                 ******** GX
+    _cpctelera_sprites_palette                                      ******** GX
+    _d_gfx_decompress_to_screen                                     ******** GX
+    _d_load                                                         ******** GX
+    _g_clock_on                                                     ******** GX
+    _g_hw                                                           ******** GX
+  0 _m_add_interrupt                                                000000A5 R
+  0 _m_add_interrupt_lines_10000_271                                000000B6 R
+  0 _m_draw_bg                                                      00000074 R
+  0 _m_draw_hw_sprites                                              0000005E R
+  2 _m_frame_c                                                      00000001 R
+  2 _m_int_idx                                                      00000000 R
+  0 _m_interrupt                                                    000000BB R
+  0 _m_pal_blank                                                    0000002A R
+  0 _m_pal_logo                                                     00000042 R
+  0 _m_pal_text                                                     0000003A R
+  0 _m_pal_usual                                                    00000032 R
+  0 _m_remove_interrupt                                             0000012F R
+  0 _m_reset_timers                                                 00000056 R
+  0 _m_start                                                        00000000 GR
+  0 _m_stop                                                         0000004A GR
+    _u_clock_interrupt                                              ******** GX
+    _u_reset_clock                                                  ******** GX
+    _u_wait_for_duration_or_kp                                      ******** GX
+    _v_blank_screen_mode_1                                          ******** GX
+    _v_clear_screen                                                 ******** GX
+    _v_set_made_cpctelera_sprite_pos                                ******** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size      132   flags    0
+   1 _DATA                                      size        0   flags    0
+   2 _INITIALIZED                               size        2   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        2   flags    0
+   8 _CABS                                      size        0   flags    8
+

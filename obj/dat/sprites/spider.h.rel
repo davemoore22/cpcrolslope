@@ -1,0 +1,53 @@
+XL4
+H 2 areas 31 global symbols
+S _spider_10_size Def00000100
+S _spider_11_size Def00000100
+S _spider_0_end Ref00000000
+S _spider_1_end Ref00000000
+S _spider_2_end Ref00000000
+S _spider_3_end Ref00000000
+S _spider_4_end Ref00000000
+S _spider_0_size Def00000100
+S _spider_5_end Ref00000000
+S _spider_1_size Def00000100
+S _spider_6_end Ref00000000
+S _spider_2_size Def00000100
+S _spider_7_end Ref00000000
+S _spider_3_size Def00000100
+S _spider_8_end Ref00000000
+S _spider_4_size Def00000100
+S _spider_9_end Ref00000000
+S _spider_5_size Def00000100
+S _spider_6_size Def00000100
+S _spider_7_size Def00000100
+S _spider_8_size Def00000100
+S _spider_9_size Def00000100
+S _spider_10_size_z Def0000004A
+S _spider_11_size_z Def00000054
+S .__.ABS. Def00000000
+S _spider_10 Ref00000000
+S _spider_11 Ref00000000
+S _spider_0_size_z Def00000038
+S _spider_1_size_z Def00000038
+S _spider_2_size_z Def00000038
+S _spider_3_size_z Def00000030
+S _spider_4_size_z Def00000031
+S _spider_5_size_z Def0000002B
+S _spider_6_size_z Def00000045
+S _spider_7_size_z Def0000004F
+S _spider_8_size_z Def00000051
+S _spider_9_size_z Def00000052
+S _spider_0 Ref00000000
+S _spider_1 Ref00000000
+S _spider_2 Ref00000000
+S _spider_3 Ref00000000
+S _spider_4 Ref00000000
+S _spider_5 Ref00000000
+S _spider_6 Ref00000000
+S _spider_7 Ref00000000
+S _spider_10_end Ref00000000
+S _spider_8 Ref00000000
+S _spider_11_end Ref00000000
+S _spider_9 Ref00000000
+A _CODE size 0 flags 0 addr 0
+A SPRITES size 0 flags 0 addr 0

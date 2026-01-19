@@ -1,0 +1,21 @@
+XL4
+H 2 areas 11 global symbols
+S _controls_0_size_z Def00000049
+S _controls_1_size_z Def0000004A
+S _controls_2_size_z Def0000004F
+S _controls_3_size_z Def0000004D
+S .__.ABS. Def00000000
+S _controls_0 Ref00000000
+S _controls_1 Ref00000000
+S _controls_2 Ref00000000
+S _controls_3 Ref00000000
+S _controls_0_end Ref00000000
+S _controls_1_end Ref00000000
+S _controls_2_end Ref00000000
+S _controls_3_end Ref00000000
+S _controls_0_size Def00000100
+S _controls_1_size Def00000100
+S _controls_2_size Def00000100
+S _controls_3_size Def00000100
+A _CODE size 0 flags 0 addr 0
+A SPRITES size 0 flags 0 addr 0

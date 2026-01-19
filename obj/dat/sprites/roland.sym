@@ -1,0 +1,21 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   1 _roland_    00000000 GR  |   1 _roland_=   00000078 GR
+    _roland_=   00000100 G   |     _roland_=   00000079 G   |   1 _roland_    00000079 GR
+  1 _roland_=   000000DD GR  |     _roland_=   00000100 G   |     _roland_=   00000065 G
+  1 _roland_    000000DE GR  |   1 _roland_=   00000153 GR  |     _roland_=   00000100 G
+    _roland_=   00000076 G   |   1 _roland_    00000154 GR  |   1 _roland_=   0000019D GR
+    _roland_=   00000100 G   |     _roland_=   0000004A G
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size      19E   flags    0
+

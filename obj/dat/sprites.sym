@@ -1,0 +1,119 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    _controls_0                                                     ******** GX
+    _controls_1                                                     ******** GX
+    _controls_2                                                     ******** GX
+    _controls_3                                                     ******** GX
+    _cpctelera_0                                                    ******** GX
+    _cpctelera_1                                                    ******** GX
+    _cpctelera_10                                                   ******** GX
+    _cpctelera_11                                                   ******** GX
+    _cpctelera_12                                                   ******** GX
+    _cpctelera_13                                                   ******** GX
+    _cpctelera_14                                                   ******** GX
+    _cpctelera_15                                                   ******** GX
+    _cpctelera_2                                                    ******** GX
+    _cpctelera_3                                                    ******** GX
+    _cpctelera_4                                                    ******** GX
+    _cpctelera_5                                                    ******** GX
+    _cpctelera_6                                                    ******** GX
+    _cpctelera_7                                                    ******** GX
+    _cpctelera_8                                                    ******** GX
+    _cpctelera_9                                                    ******** GX
+  1 _cpctelera_sprites_data                                         000000F4 GR
+  1 _cpctelera_sprites_palette                                      00000234 GR
+    _ghost_0                                                        ******** GX
+    _ghost_1                                                        ******** GX
+    _ghost_2                                                        ******** GX
+    _ghost_3                                                        ******** GX
+    _ghost_4                                                        ******** GX
+    _ghost_5                                                        ******** GX
+    _ghost_6                                                        ******** GX
+    _ghost_7                                                        ******** GX
+    _ghost_8                                                        ******** GX
+  1 _ghost_sprites_data                                             00000080 GR
+  1 _ghost_sprites_palette                                          00000194 GR
+    _mode_0                                                         ******** GX
+    _mode_1                                                         ******** GX
+    _mode_2                                                         ******** GX
+    _mode_3                                                         ******** GX
+    _mode_4                                                         ******** GX
+    _mode_5                                                         ******** GX
+    _mode_6                                                         ******** GX
+    _mode_7                                                         ******** GX
+    _mode_8                                                         ******** GX
+  1 _mode_sprites_data                                              000000D0 GR
+  1 _mode_sprites_palette                                           00000214 GR
+    _play_0                                                         ******** GX
+    _play_1                                                         ******** GX
+    _play_2                                                         ******** GX
+    _roland_0                                                       ******** GX
+    _roland_1                                                       ******** GX
+    _roland_2                                                       ******** GX
+    _roland_3                                                       ******** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  1 _roland_sprites_data                                            00000000 GR
+  1 _roland_sprites_palette                                         00000134 GR
+    _snowball_0                                                     ******** GX
+    _snowball_1                                                     ******** GX
+    _snowball_10                                                    ******** GX
+    _snowball_11                                                    ******** GX
+    _snowball_12                                                    ******** GX
+    _snowball_13                                                    ******** GX
+    _snowball_14                                                    ******** GX
+    _snowball_15                                                    ******** GX
+    _snowball_2                                                     ******** GX
+    _snowball_3                                                     ******** GX
+    _snowball_4                                                     ******** GX
+    _snowball_5                                                     ******** GX
+    _snowball_6                                                     ******** GX
+    _snowball_7                                                     ******** GX
+    _snowball_8                                                     ******** GX
+    _snowball_9                                                     ******** GX
+  1 _snowball_sprites_data                                          00000010 GR
+  1 _snowball_sprites_palette                                       00000154 GR
+    _spider_0                                                       ******** GX
+    _spider_1                                                       ******** GX
+    _spider_10                                                      ******** GX
+    _spider_11                                                      ******** GX
+    _spider_2                                                       ******** GX
+    _spider_3                                                       ******** GX
+    _spider_4                                                       ******** GX
+    _spider_5                                                       ******** GX
+    _spider_6                                                       ******** GX
+    _spider_7                                                       ******** GX
+    _spider_8                                                       ******** GX
+    _spider_9                                                       ******** GX
+  1 _spider_sprites_data                                            00000050 GR
+  1 _spider_sprites_palette                                         00000174 GR
+  1 _titles_sprites_data                                            000000A4 GR
+  1 _titles_sprites_palette_classic                                 000001B4 GR
+  1 _titles_sprites_palette_mania                                   000001F4 GR
+  1 _titles_sprites_palette_zen                                     000001D4 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 3
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size        0   flags    0
+   1 _DATA                                      size      254   flags    0
+   2 _INITIALIZED                               size        0   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        0   flags    0
+   8 _CABS                                      size        0   flags    8
+

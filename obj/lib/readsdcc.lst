@@ -1,0 +1,656 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+
+
+                                      1 ;	FDC Code reading AMSDOS file
+                                      2 ;	Without system.
+                                      3 ;	V1.0
+                                      4 ;
+                                      5 ;	By Targhan/Arkos
+                                      6 ;
+                                      7 ;	AMSDOS limitations still present.
+                                      8 ;	9 2-sized sectors per track (c1-c9), one side.
+                                      9 ;	However, can read sectors up to 41 tracks
+                                     10 ;	(used by files copied with Disc'o'Magic, for example).
+                                     11 ;
+                                     12 ;	Can't read ASCII files (who cares ?)
+                                     13 ;
+                                     14 ;
+                                     15 ;	Filename entered follow the format =
+                                     16 ;	AAAAAAAABBB
+                                     17 ;	Use upper case only. Do not put the '.'.
+                                     18 ;
+                                     19 ;
+                                     20 ;
+                                     21 ;	Proper use =
+                                     22 ;	call FDCON	to turn the drive ON
+                                     23 ;
+                                     24 ;	ld a,drive	(0-3)
+                                     25 ;	ld b,head	(0-1)
+                                     26 ;	call FDCVARS	to tell which drive to use, head to read.
+                                     27 ;
+                                     28 ;	ld hl,FILENAME
+                                     29 ;	ld de,destination
+                                     30 ;	ld bc,buffer	read below about it.
+                                     31 ;	call LOADFILE	to load the file.
+                                     32 ;	Return =
+                                     33 ;	A=state. 0=ok  1=disc missing  2=read fail
+                                     34 ;	3=file not found
+                                     35 ;
+                                     36 ;	When you've loaded all the files you wanted =
+                                     37 ;	call FDCOFF
+                                     38 ;
+                                     39 ;	You shouldn't need it, but...
+                                     40 ;	call RECALIBR
+                                     41 ;	to recalibrate the current drive (use FDCON
+                                     42 ;	and FDCVARS first !). AMSDOS does it when you turn
+                                     43 ;	the CPC on. You can also do it when an error disc
+                                     44 ;	happened, before trying loading the file again.
+                                     45 ;
+                                     46 ;	That's it !
+                                     47 ;
+                                     48 ;
+                                     49 ;	Notes
+                                     50 ;	- The 'buffer' of LOADFILE CAN be equal to DE. It is used
+                                     51 ;	  to load one sector of the Directory. In the case you want
+                                     52 ;	  to load a screen in #c000, you might want to set BC to
+                                     53 ;	  another address, so that you don't see garbage at the
+                                     54 ;	  beginning of the loading.
+                                     55 ;	- By changing the Head, you can read the file on the second
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+
+
+                                     56 ;  	 side of a 3"5 disc.
+                                     57 ;	- Automatically skips the AMSDOS header.
+                                     58 ;	- Even if the file is not found, 512 bytes will be use
+                                     59 ;	from the 'destination' address.
+                                     60 ;	- The User of a file is ignored (who cares ?), except for deleted files.
+                                     61 ;	- No buffer is needed.
+                                     62 ;	- The interruptions are CUT by the loading code.
+                                     63 ;	- Interruptions are turned on when turning on the FDC, so
+                                     64 ;	  put #c9fb in #38 before if you don't want your
+                                     65 ;	  interruptions code to be run at this moment.
+                                     66 ;	- Some little tables are defined at the end. You can relocate
+                                     67 ;	  them where you want if needed.
+                                     68 ;
+                                     69 ;
+                                     70 ;
+                                     71 ;; Adaptation for CPCTelera by Christophe Kohler and Arnaud Bouche (@Arnaud6128)
+                                     72 ;; 07/2026 Fix loading TABSECTS in DE
+                                     73 
+                         000000C1    74 .equ DIRFSECT,0xC1
+                         00000004    75 .equ NBMAXENT,4
+                         00000000    76 .equ DIRTRACK, 0
+                                     77 
+                                     78 ;;void asm_LoadFile(u8* fileName, u8* destBuffer, u8* sectorTable) __z88dk_callee;
+    00000000                         79 _asm_load_file::
+                                     80 	;; CPCtelera get parameters from the Stack
+                                     81 	
+                                     82 	
+                                     83  ;; Get parameters from HL and DE registers and stack ((16 + 16) + (8 + 8) bits), with __sdcccall(1) convention
+                                     84    ;; HL = File name
+                                     85    ;; DE = Destination buffer size minimum of 512kb
+                                     86    
+                                     87    ;; Get next parameters from the stack 
+    00000000 F1               [10]   88    pop  af   ;; [3] AF = Return Address
+    00000001 C1               [10]   89    pop  bc   ;; [3] BC = BC = Sector table buffer of 256Kb
+    00000002 F5               [11]   90    push af          ;; [4] AF = Returning back address in the stack because function uses __z88dk_callee convention
+                                     91 	
+                                     92 	;; Store the sector table address
+    00000003 ED 43 CE 02      [20]   93 	ld (TABSECTS), bc
+                                     94 	
+                                     95 	;; Save IX and IY register to be restored
+    00000007 DD 22 1E 00      [20]   96 	ld  (RESTORE_IX + 2), ix
+    0000000B FD 22 22 00      [20]   97 	ld  (RESTORE_IY + 2), iy
+                                     98 
+    0000000F AF               [ 4]   99     xor a
+    00000010 06 00            [ 7]  100     ld b,#0
+    00000012 CD 32 00         [17]  101     call FDCVARS
+                                    102    
+                                    103     ;; Buffer = Destination
+    00000015 42               [ 4]  104     ld b, d
+    00000016 4B               [ 4]  105 	ld c, e
+    00000017 CD 6A 00         [17]  106     call LOADFILE
+                                    107     
+    0000001A 30 09            [12]  108 	jr nc,ERROR
+                                    109 	
+    0000001C                        110 RESTORE_IX:	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 3
+Hexadecimal [32-Bits]
+
+
+
+    0000001C DD 21 00 00      [14]  111     ld ix, #0000
+                                    112    
+    00000020                        113 RESTORE_IY:
+    00000020 FD 21 00 00      [14]  114 	ld iy, #0000
+    00000024 C9               [10]  115     ret 
+                                    116 	
+    00000025                        117 ERROR: 
+    00000025 01 10 7F         [10]  118     ld bc,#0x7f10 ; CK : Screen border RED
+    00000028 ED 49            [12]  119     out (c),c
+    0000002A 0E 4C            [ 7]  120     ld c,#0x4c
+    0000002C ED 49            [12]  121     out (c),c
+    0000002E CD 5F 00         [17]  122 	call FDCOFF
+    00000031 C9               [10]  123     ret 
+    00000032                        124 FDCVARS: 
+    00000032 32 BD 02         [13]  125     ld (FDCDRIVE),a
+    00000035 4F               [ 4]  126     ld c,a
+    00000036 78               [ 4]  127     ld a,b
+    00000037 32 BE 02         [13]  128     ld (FDCHEAD),a
+    0000003A 17               [ 4]  129     rla 
+    0000003B 17               [ 4]  130     rla 
+    0000003C E6 04            [ 7]  131     and #0b100
+    0000003E B1               [ 4]  132     or c
+    0000003F 32 BF 02         [13]  133     ld (FDCIDDR),a
+    00000042 C9               [10]  134     ret 
+                                    135 ;Turn FDC on and wait a bit.	
+    00000043                        136 _asm_fdc_on::
+    00000043                        137 FDCON: 
+    00000043 3A BC 02         [13]  138     ld a,(FDCMOTOR)
+    00000046 B7               [ 4]  139     or a
+    00000047 C0               [11]  140     ret nz
+    00000048 3C               [ 4]  141     inc a
+    00000049 32 BC 02         [13]  142     ld (FDCMOTOR),a
+    0000004C 01 7E FA         [10]  143     ld bc,#0xFA7E
+    0000004F 3E 01            [ 7]  144     ld a,#1
+    00000051 ED 79            [12]  145     out (c),a
+    00000053 FB               [ 4]  146 	ei ;Wait for motor to get full speed
+    00000054 01 2C 01         [10]  147     ld bc,#300
+    00000057                        148 WAIT: 
+    00000057 76               [ 4]  149     halt
+    00000058 0B               [ 6]  150     dec bc
+    00000059 78               [ 4]  151     ld a,b
+    0000005A B1               [ 4]  152     or c
+    0000005B 20 FA            [12]  153     jr nz,WAIT
+    0000005D F3               [ 4]  154 	di
+    0000005E C9               [10]  155     ret
+                                    156 ;Turn FDC off.	
+    0000005F                        157 _asm_fdc_off::
+    0000005F                        158 FDCOFF: 
+    0000005F AF               [ 4]  159     xor a
+    00000060 32 BC 02         [13]  160     ld (FDCMOTOR),a
+    00000063 01 7E FA         [10]  161     ld bc,#0xFA7E
+    00000066 AF               [ 4]  162     xor a
+    00000067 ED 79            [12]  163     out (c),a
+    00000069 C9               [10]  164     ret 
+                                    165 	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 4
+Hexadecimal [32-Bits]
+
+
+
+                                    166 ;Recalibrate current drive uncomment if needed
+                                    167 ;;asm_Recalibrate::
+                                    168 ;RECALIBR:
+                                    169 ;    call RECALIB2
+                                    170 ;    call RECALIB2
+                                    171 ;    ret 
+                                    172 ;RECALIB2: 
+                                    173 ;    ld a,#0b00000111
+                                    174 ;    call PUTFDC
+                                    175 ;    ld a,(FDCIDDR)
+                                    176 ;    call PUTFDC
+                                    177 ;    jr WAITEND
+                                    178 
+                                    179 ;Load a file
+                                    180 ;HL=Filename
+                                    181 ;DE=Where to load it
+                                    182 ;BC=#200 buffer
+                                    183 ;RET=A=state. 0=ok  1=disc missing  2=read fail
+                                    184 ;3=file not found	
+    0000006A                        185 LOADFILE: 
+    0000006A 22 CA 02         [16]  186     ld (PTFILENM),hl
+    0000006D ED 53 C6 02      [20]  187     ld (LOADWHER),de
+    00000071 ED 43 C8 02      [20]  188     ld (ADBUFFER),bc
+    00000075 CD D0 01         [17]  189     call BUILDTAB
+    00000078 38 02            [12]  190 	jr c,LF_TABOK
+    0000007A AF               [ 4]  191 	xor a
+    0000007B C9               [10]  192 	ret
+                                    193 	
+    0000007C                        194 LF_TABOK:
+    0000007C 3E 80            [ 7]  195 	ld a,#128
+    0000007E 32 39 01         [13]  196 	ld (SKIPBYTE+1),a	
+                                    197 	
+                                    198 ;Reading the file		
+    00000081 DD 2A CE 02      [20]  199     ld ix,(TABSECTS)
+    00000085                        200 LOADLP: 
+    00000085 DD 7E 00         [19]  201     ld a,+0(ix)
+    00000088 FE FF            [ 7]  202     cp #0xff
+    0000008A 28 26            [12]  203     jr z,LOADFOK
+    0000008C FE FE            [ 7]  204     cp #0xfe
+    0000008E 28 1C            [12]  205     jr z,LOADNEXT
+    00000090 DD 46 01         [19]  206     ld b,+1(ix)
+    00000093 DD E5            [15]  207     push ix
+    00000095 2A C6 02         [16]  208 	ld hl,(LOADWHER)	
+    00000098 CD FE 00         [17]  209     call READSECT
+    0000009B DD E1            [14]  210     pop ix
+    0000009D D0               [11]  211     ret nc
+    0000009E 22 C6 02         [16]  212     ld (LOADWHER),hl
+    000000A1 2A CC 02         [16]  213     ld hl,(TOREAD)
+    000000A4 7D               [ 4]  214     ld a,l
+    000000A5 B4               [ 4]  215     or h
+    000000A6 28 0A            [12]  216     jr z,LOADFOK
+    000000A8 AF               [ 4]  217     xor a
+    000000A9 32 39 01         [13]  218     ld (SKIPBYTE+1),a
+    000000AC                        219 LOADNEXT: 
+    000000AC DD 23            [10]  220     inc ix
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 5
+Hexadecimal [32-Bits]
+
+
+
+    000000AE DD 23            [10]  221     inc ix
+    000000B0 18 D3            [12]  222     jr LOADLP
+    000000B2                        223 LOADFOK: 
+    000000B2 37               [ 4]  224     scf
+    000000B3 C9               [10]  225     ret 
+                                    226 ;Wait for the end of the current instruction (using ST0).	
+    000000B4                        227 WAITEND: 
+    000000B4 3E 08            [ 7]  228     ld a,#0b00001000
+    000000B6 CD D1 00         [17]  229     call PUTFDC
+    000000B9 CD DF 00         [17]  230     call GETFDC ;Get ST0
+    000000BC 32 C0 02         [13]  231     ld (ST0),a
+    000000BF CD DF 00         [17]  232     call GETFDC
+    000000C2 AF               [ 4]  233     xor a
+    000000C3 32 C1 02         [13]  234     ld (ST1),a ;Reset ST1 and ST2
+    000000C6 32 C2 02         [13]  235     ld (ST2),a
+    000000C9 3A C0 02         [13]  236     ld a,(ST0)
+    000000CC CB 6F            [ 8]  237     bit 5,a ;Instruction over ?
+    000000CE 28 E4            [12]  238     jr z,WAITEND
+    000000D0 C9               [10]  239     ret 
+                                    240 ;Send data to FDC
+                                    241 ;A=data	
+    000000D1                        242 PUTFDC: 
+    000000D1 F5               [11]  243     push af
+                                    244     ;;ex af,af'
+    000000D2 01 7E FB         [10]  245     ld bc,#0xFB7E
+    000000D5                        246 PUTFD2: 
+    000000D5 ED 78            [12]  247     in a,(c)
+    000000D7 F2 D5 00         [10]  248     jp p,PUTFD2
+                                    249     ;;ex af,af'
+    000000DA F1               [10]  250 	pop af
+    000000DB 0C               [ 4]  251     inc c
+    000000DC ED 79            [12]  252     out (c),a
+    000000DE C9               [10]  253     ret 
+                                    254 ;Get data from FDC
+                                    255 ;Ret = A=FDC data	
+    000000DF                        256 GETFDC: 
+    000000DF 01 7E FB         [10]  257     ld bc,#0xFB7E
+    000000E2                        258 GETFD2: 
+    000000E2 ED 78            [12]  259     in a,(c)
+    000000E4 F2 E2 00         [10]  260     jp p,GETFD2
+    000000E7 0C               [ 4]  261     inc c
+    000000E8 ED 78            [12]  262     in a,(c)
+    000000EA C9               [10]  263     ret 
+                                    264 ;Track change
+                                    265 ;a=nb piste	
+    000000EB                        266 GOTOPIST: 
+    000000EB F5               [11]  267     push af
+    000000EC 3E 0F            [ 7]  268     ld a,#0b00001111
+    000000EE CD D1 00         [17]  269     call PUTFDC
+    000000F1 3A BF 02         [13]  270     ld a,(FDCIDDR)
+    000000F4 CD D1 00         [17]  271     call PUTFDC
+    000000F7 F1               [10]  272     pop af
+    000000F8 CD D1 00         [17]  273     call PUTFDC
+    000000FB C3 B4 00         [10]  274     jp WAITEND
+                                    275      
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 6
+Hexadecimal [32-Bits]
+
+
+
+                                    276 ;Read sector.
+                                    277 ;A=track
+                                    278 ;B=ID sector
+                                    279 ;RET=A=state.Carry=1=ok A=0=ok  1=disc missing  2=read fail
+                                    280 ;3=file not found
+                                    281 ;HL=Where new data should be loaded
+    000000FE                        282 READSECT: 
+    000000FE 22 5A 01         [16]  283 	ld (RSTarget+1),hl
+    00000101 32 14 01         [13]  284     ld (RSPIST+1),a
+    00000104 C5               [11]  285     push bc
+    00000105 CD EB 00         [17]  286     call GOTOPIST
+                                    287 
+    00000108 3E 46            [ 7]  288     ld a,#0b01000110 ; Command "Read sector"
+    0000010A CD D1 00         [17]  289     call PUTFDC
+    0000010D 3A BF 02         [13]  290     ld a,(FDCIDDR) ;ID drive
+    00000110 CD D1 00         [17]  291     call PUTFDC
+    00000113                        292 RSPIST: 
+    00000113 3E 00            [ 7]  293     ld a,#0 ;track
+    00000115 CD D1 00         [17]  294     call PUTFDC
+    00000118 AF               [ 4]  295     xor a ;head
+    00000119 CD D1 00         [17]  296     call PUTFDC
+    0000011C C1               [10]  297     pop bc ;ID sect
+    0000011D 78               [ 4]  298     ld a,b
+    0000011E F5               [11]  299     push af
+    0000011F CD D1 00         [17]  300     call PUTFDC
+    00000122 3E 02            [ 7]  301     ld a,#2 ;size
+    00000124 CD D1 00         [17]  302     call PUTFDC
+    00000127 F1               [10]  303     pop af ;last sect to read
+    00000128 CD D1 00         [17]  304     call PUTFDC
+    0000012B 3E 52            [ 7]  305     ld a,#0x52 ;GAP
+    0000012D CD D1 00         [17]  306     call PUTFDC
+    00000130 3E FF            [ 7]  307     ld a,#0xFF
+    00000132 CD D1 00         [17]  308     call PUTFDC
+    00000135 01 7E FB         [10]  309     ld bc,#0xFB7E ; Information état FDC
+    00000138                        310 SKIPBYTE: 
+    00000138 3E 00            [ 7]  311     ld a,#0 ;If header, skip it
+    0000013A B7               [ 4]  312     or a
+    0000013B 28 1C            [12]  313     jr z,RSAVLOOP
+    0000013D 5F               [ 4]  314     ld e,a
+    0000013E 21 D0 02         [10]  315     ld hl,#BUFHEAD
+                                    316 ;Read bytes to the header buffer.	
+    00000141                        317 RSSKIPLP: 
+    00000141 ED 78            [12]  318     in a,(c) ;FDC ready for transf ?
+    00000143 F2 41 01         [10]  319     jp p,RSSKIPLP
+    00000146 E6 20            [ 7]  320     and ##0b00100000 ;FDC performing ?
+    00000148 28 39            [12]  321     jr z,RSFIN
+    0000014A 0C               [ 4]  322     inc c
+    0000014B ED 78            [12]  323     in a,(c)
+    0000014D 77               [ 7]  324     ld (hl),a
+    0000014E 23               [ 6]  325     inc hl
+    0000014F 0D               [ 4]  326     dec c
+    00000150 1D               [ 4]  327     dec e
+    00000151 20 EE            [12]  328     jr nz,RSSKIPLP
+    00000153 2A 10 03         [16]  329     ld hl,(BUFHEAD+64) ;get filesize
+    00000156 22 CC 02         [16]  330     ld (TOREAD),hl
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 7
+Hexadecimal [32-Bits]
+
+
+
+                                    331 	;Normal reading code.
+    00000159                        332 RSAVLOOP: 
+    00000159                        333 RSTarget:	
+    00000159 21 00 00         [10]  334 	ld hl,#0
+    0000015C ED 5B CC 02      [20]  335     ld de,(TOREAD)
+    00000160                        336 RSLOOP: 
+    00000160 ED 78            [12]  337     in a,(c) ;FDC ready for transf ?
+    00000162 F2 60 01         [10]  338     jp p,RSLOOP
+    00000165 E6 20            [ 7]  339     and #0b00100000 ;FDC performing ?
+    00000167 28 1A            [12]  340     jr z,RSFIN
+    00000169 0C               [ 4]  341     inc c
+    0000016A ED 78            [12]  342     in a,(c) ; get data from port FDC
+    0000016C 77               [ 7]  343     ld (hl),a ; copy to destination buffer
+    0000016D 23               [ 6]  344     inc hl
+    0000016E 0D               [ 4]  345     dec c
+    0000016F 1B               [ 6]  346     dec de
+    00000170 7B               [ 4]  347     ld a,e
+    00000171 B2               [ 4]  348     or d
+    00000172 20 EC            [12]  349     jr nz,RSLOOP
+                                    350 ;Reading with saving. Done if end of file but sectors left.	
+    00000174                        351 RSWASTE: 
+    00000174 ED 78            [12]  352     in a,(c) ;FDC ready for transf ?
+    00000176 F2 74 01         [10]  353     jp p,RSWASTE
+    00000179 E6 20            [ 7]  354     and #0b00100000 ;FDC performing ?
+    0000017B 28 06            [12]  355     jr z,RSFIN
+    0000017D 0C               [ 4]  356     inc c
+    0000017E ED 78            [12]  357     in a,(c)
+    00000180 0D               [ 4]  358     dec c
+    00000181 18 F1            [12]  359     jr RSWASTE
+                                    360 ;Reading instr result	
+    00000183                        361 RSFIN: 
+    00000183 ED 53 CC 02      [20]  362     ld (TOREAD),de
+    00000187 CD DF 00         [17]  363     call GETFDC
+    0000018A 32 C0 02         [13]  364     ld (ST0),a
+    0000018D CD DF 00         [17]  365     call GETFDC
+    00000190 32 C1 02         [13]  366     ld (ST1),a
+    00000193 CD DF 00         [17]  367     call GETFDC
+    00000196 32 C2 02         [13]  368     ld (ST2),a
+    00000199 CD DF 00         [17]  369     call GETFDC
+    0000019C CD DF 00         [17]  370     call GETFDC
+    0000019F CD DF 00         [17]  371     call GETFDC
+    000001A2 CD DF 00         [17]  372     call GETFDC
+                                    373 ;Test errors.
+                                    374 ;ret= Carry=1=ok a=0=ok  a=1=disc missing  2=read fail
+                                    375 ;ute ST0, ST1, ST2	
+    000001A5 3A C0 02         [13]  376     ld a,(ST0)
+    000001A8 CB 7F            [ 8]  377     bit 7,a
+    000001AA 20 18            [12]  378     jr nz,TESTEJEC ;no disc
+    000001AC CB 5F            [ 8]  379     bit 3,a
+    000001AE 20 14            [12]  380     jr nz,TESTEJEC ;no disc
+    000001B0 CB 67            [ 8]  381     bit 4,a
+    000001B2 20 14            [12]  382     jr nz,TESTFAIL ;Read fail
+    000001B4 3A C1 02         [13]  383     ld a,(ST1)
+    000001B7 E6 37            [ 7]  384     and #0b00110111
+    000001B9 20 0D            [12]  385     jr nz,TESTFAIL
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 8
+Hexadecimal [32-Bits]
+
+
+
+    000001BB 3A C2 02         [13]  386     ld a,(ST2)
+    000001BE E6 30            [ 7]  387     and #0b00110000
+    000001C0 20 06            [12]  388     jr nz,TESTFAIL
+                                    389 ;No error.
+    000001C2 37               [ 4]  390 	scf
+    000001C3 C9               [10]  391 	ret
+    000001C4                        392 TESTEJEC: 
+    000001C4 3E 01            [ 7]  393     ld a,#1
+    000001C6 B7               [ 4]  394     or a
+    000001C7 C9               [10]  395     ret 
+    000001C8                        396 TESTFAIL: 
+    000001C8 3E 02            [ 7]  397     ld a,#2
+    000001CA B7               [ 4]  398     or a
+    000001CB C9               [10]  399     ret 
+    000001CC                        400 ERRFNF: 
+    000001CC 3E 03            [ 7]  401     ld a,#3
+    000001CE B7               [ 4]  402     or a
+    000001CF C9               [10]  403     ret 
+                                    404 ;Search a file in the AMSDOS directory, and
+                                    405 ;build the sector table.
+                                    406 ;RET=A=state. 0=ok  1=disc missing  2=read fail
+                                    407 ;3=file not found	
+    000001D0                        408 BUILDTAB: 
+                                    409     ;.db 0xed, 0xff ; breackpoint
+    000001D0 3E C1            [ 7]  410     ld a,#DIRFSECT ;First sector of the directory #c1
+    000001D2 32 F9 01         [13]  411     ld (BTSECT+1),a
+    000001D5 C6 04            [ 7]  412     add a,#4
+    000001D7 32 31 02         [13]  413     ld (BTESECT+1),a
+    000001DA AF               [ 4]  414     xor a
+    000001DB 32 C3 02         [13]  415     ld (FILFOUND),a
+    000001DE 32 39 01         [13]  416     ld (SKIPBYTE+1),a
+    000001E1 21 FF FF         [10]  417     ld hl,#0xffff
+    000001E4 22 CC 02         [16]  418     ld (TOREAD),hl
+    000001E7 2A CE 02         [16]  419     ld hl,(TABSECTS)
+    000001EA ED 5B CE 02      [20]  420     ld de,(TABSECTS)
+    000001EE 13               [ 6]  421 	inc de
+    000001EF 01 00 01         [10]  422     ld bc,#256 ; Size of buffer
+    000001F2 36 FE            [10]  423     ld (hl),#0xfe
+    000001F4 ED B0            [21]  424     ldir ; Repeats LDI (LD (DE),(HL), then increments DE, HL, and decrements BC) until BC=0. Note that if BC=0 before this instruction is called, it will loop around until BC=0 again.
+    000001F6                        425 BTLOOP: 
+    000001F6 3E 00            [ 7]  426     ld a,#DIRTRACK ; track DIRTRACK = 0
+    000001F8                        427 BTSECT: 
+    000001F8 06 C1            [ 7]  428     ld b,#0xc1 ; ID sector CK : the value will be automodified
+    000001FA 2A C8 02         [16]  429 	ld hl,(ADBUFFER)
+    000001FD CD FE 00         [17]  430     call READSECT ;HL=Where new data should be loaded (LOADWHER)
+    00000200 D0               [11]  431     ret nc
+                                    432 	
+    00000201 2A C8 02         [16]  433     ld hl,(ADBUFFER)
+    00000204 22 0E 02         [16]  434     ld (BTBUFF+1),hl
+                                    435 ;Search in the loaded sector the right entry(ies)	
+    00000207 06 10            [ 7]  436     ld b,#16
+    00000209                        437 BTENTLP: 
+    00000209 C5               [11]  438     push bc
+    0000020A 2A CA 02         [16]  439     ld hl,(PTFILENM)
+    0000020D                        440 BTBUFF: 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 9
+Hexadecimal [32-Bits]
+
+
+
+    0000020D 11 00 00         [10]  441     ld de,#0
+    00000210 1A               [ 7]  442     ld a,(de)
+    00000211 FE E5            [ 7]  443     cp #0xe5 ;ignore deleted files
+    00000213 28 07            [12]  444     jr z,BTNEXT
+    00000215 13               [ 6]  445     inc de
+    00000216 CD 66 02         [17]  446     call CMP
+    00000219 DC 40 02         [17]  447     call c,BTFOUND
+    0000021C                        448 BTNEXT: 
+    0000021C 2A 0E 02         [16]  449     ld hl,(BTBUFF+1)
+    0000021F 11 20 00         [10]  450     ld de,#32
+    00000222 19               [11]  451     add hl,de
+    00000223 22 0E 02         [16]  452     ld (BTBUFF+1),hl
+    00000226 C1               [10]  453     pop bc
+    00000227 10 E0            [13]  454     djnz BTENTLP
+                                    455 ;Next sector	
+    00000229 3A F9 01         [13]  456     ld a,(BTSECT+1)
+    0000022C 3C               [ 4]  457     inc a
+    0000022D 32 F9 01         [13]  458     ld (BTSECT+1),a
+    00000230                        459 BTESECT:  
+    00000230 FE C5            [ 7]  460     cp #0xc5 ; CK : the track value will be automodified
+    00000232 20 C2            [12]  461     jr nz,BTLOOP
+    00000234 3A C3 02         [13]  462     ld a,(FILFOUND)
+    00000237 B7               [ 4]  463     or a
+    00000238 28 02            [12]  464     jr z,BTNOFND
+                                    465 ;No error.
+    0000023A 37               [ 4]  466     scf
+    0000023B C9               [10]  467     ret 
+    0000023C                        468 BTNOFND: 
+    0000023C 3E 03            [ 7]  469     ld a,#3 ;File not found
+    0000023E B7               [ 4]  470 	or a            ;Shoudln't be needed.
+    0000023F C9               [10]  471     ret 
+                                    472 ;Right entry found.	
+    00000240                        473 BTFOUND: 
+    00000240 3E 01            [ 7]  474     ld a,#1
+    00000242 32 C3 02         [13]  475     ld (FILFOUND),a
+    00000245 DD 2A 0E 02      [20]  476     ld ix,(BTBUFF+1)
+    00000249 DD 7E 0C         [19]  477     ld a,+12(ix)
+    0000024C 6F               [ 4]  478     ld l,a
+    0000024D 26 00            [ 7]  479     ld h,#0
+    0000024F 29               [11]  480     add hl,hl
+    00000250 29               [11]  481     add hl,hl
+    00000251 29               [11]  482     add hl,hl
+    00000252 29               [11]  483     add hl,hl
+    00000253 29               [11]  484     add hl,hl
+    00000254 29               [11]  485     add hl,hl
+    00000255 ED 5B CE 02      [20]  486     ld de,(TABSECTS)
+    00000259 19               [11]  487     add hl,de
+    0000025A EB               [ 4]  488     ex de,hl
+    0000025B FD                     489     .db 253 ; ??  defb #fd : ld l,e
+    0000025C 6B                     490     .db 107
+    0000025D FD                     491     .db 253 ; ?? defb #fd : ld h,d
+    0000025E 62                     492     .db 98
+    0000025F 11 10 00         [10]  493     ld de,#16
+    00000262 DD 19            [15]  494     add ix,de
+                                    495 ;ix=source
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                           Page 10
+Hexadecimal [32-Bits]
+
+
+
+                                    496 ;iy=dest	
+    00000264 18 10            [12]  497     jr CONV
+                                    498 
+                                    499 ;Compare two strings. 7th bit to 0.
+                                    500 ;DE=     buffer   HL=filename
+                                    501 ;RET=    Carry=OK	
+    00000266                        502 CMP: 
+    00000266 06 0B            [ 7]  503     ld b,#11
+    00000268                        504 CM2: 
+    00000268 1A               [ 7]  505     ld a,(de)
+    00000269 CB BF            [ 8]  506     res 7,a
+    0000026B BE               [ 7]  507     cp (hl)
+    0000026C 20 06            [12]  508     jr nz,CMPNOT
+    0000026E 23               [ 6]  509     inc hl
+    0000026F 13               [ 6]  510     inc de
+    00000270 10 F6            [13]  511     djnz CM2
+    00000272 37               [ 4]  512     scf
+    00000273 C9               [10]  513     ret 
+                                    514 	
+    00000274                        515 CMPNOT: 
+    00000274 B7               [ 4]  516     or a
+    00000275 C9               [10]  517     ret 
+                                    518 	
+                                    519 ;Convert block table to table of tracks+sects
+                                    520 ;IX=src  IY=dest	
+    00000276                        521 CONV: 
+    00000276 06 10            [ 7]  522     ld b,#16 ;Reading 16 blocks max
+    00000278                        523 CVNEXT: 
+    00000278 DD 7E 00         [19]  524     ld a,+0(ix) ;read block number
+    0000027B B7               [ 4]  525     or a
+    0000027C C8               [11]  526     ret z
+    0000027D DD 23            [10]  527     inc ix
+    0000027F C5               [11]  528     push bc
+    00000280 6F               [ 4]  529     ld l,a
+    00000281 26 00            [ 7]  530     ld h,#0
+    00000283 29               [11]  531     add hl,hl
+    00000284 CD AA 02         [17]  532     call DIV9
+    00000287 FD 71 00         [19]  533     ld +0(iy),c ;get track
+                                    534 ;  sect1	
+    0000028A 2A C4 02         [16]  535     ld hl,(RESTE)
+    0000028D 7D               [ 4]  536     ld a,l
+    0000028E C6 C1            [ 7]  537     add a,#DIRFSECT ; DIRFSECT equ #c1
+    00000290 FD 77 01         [19]  538     ld +1(iy),a
+                                    539 ; sect2	
+    00000293 3C               [ 4]  540     inc a
+    00000294 FE CA            [ 7]  541     cp #0xCA
+    00000296 20 03            [12]  542     jr nz,CVP2
+    00000298 3E C1            [ 7]  543     ld a,#0xC1
+    0000029A 0C               [ 4]  544     inc c
+    0000029B                        545 CVP2: 
+    0000029B FD 71 02         [19]  546     ld +2(iy),c
+    0000029E FD 77 03         [19]  547     ld +3(iy),a
+    000002A1 11 04 00         [10]  548  	ld de,#NBMAXENT ;ld de,#NBMAXENT ;  ld de,4
+    000002A4 FD 19            [15]  549     add iy,de
+    000002A6 C1               [10]  550     pop bc
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                           Page 11
+Hexadecimal [32-Bits]
+
+
+
+    000002A7 10 CF            [13]  551     djnz CVNEXT
+    000002A9 C9               [10]  552     ret 
+                                    553 	
+    000002AA                        554 DIV9: 
+                                    555     ;ld de,#NBMAXENT+5 ;Not optimised. Who cares ?
+    000002AA 11 09 00         [10]  556 	ld de,#NBMAXENT + #5
+    000002AD 0E 00            [ 7]  557     ld c,#0
+    000002AF                        558 DIV91: 
+    000002AF B7               [ 4]  559     or a
+    000002B0 ED 52            [15]  560     sbc hl,de
+    000002B2 38 03            [12]  561     jr c,DIV92
+    000002B4 0C               [ 4]  562     inc c
+    000002B5 18 F8            [12]  563     jr DIV91
+    000002B7                        564 DIV92: 
+    000002B7 19               [11]  565     add hl,de
+    000002B8 22 C4 02         [16]  566     ld (RESTE),hl
+    000002BB C9               [10]  567     ret 
+                                    568 	
+    000002BC                        569 FDCMOTOR:  ;Drive motor (0-1)
+    000002BC 00                     570     .db 0 
+    000002BD                        571 FDCDRIVE:  ;Drive used (0-3)
+    000002BD 00                     572     .db 0
+    000002BE                        573 FDCHEAD:   ;Head used (0-1)
+    000002BE 00                     574     .db 0
+    000002BF                        575 FDCIDDR:   ;Drive ID.
+    000002BF 00                     576     .db 0
+    000002C0                        577 ST0: 
+    000002C0 00                     578     .db 0
+    000002C1                        579 ST1: 
+    000002C1 00                     580     .db 0
+    000002C2                        581 ST2: 
+    000002C2 00                     582     .db 0
+    000002C3                        583 FILFOUND: 
+    000002C3 00                     584     .db 0
+    000002C4                        585 RESTE: 
+    000002C4 00 00                  586     .dw 0
+    000002C6                        587 LOADWHER: ;Where to load the file
+    000002C6 00 00                  588     .dw 0
+    000002C8                        589 ADBUFFER: ;#200 buffer
+    000002C8 00 00                  590     .dw 0
+    000002CA                        591 PTFILENM: ;Point on the filename
+    000002CA 00 00                  592     .dw 0
+    000002CC                        593 TOREAD: ;Size (decrease)
+    000002CC 00 00                  594     .dw 0
+                                    595 ;Table where is build the sector table.
+                                    596 ;One directory entry can contain 16 blocks, hence '16'
+                                    597 ;One block=2 sectors, each one defined by a track+sect ID. Hence the '*4'.
+    000002CE                        598 TABSECTS: ;16*4*4, #0xfe
+    000002CE 00 00                  599     .dw 0
+    000002D0                        600 BUFHEAD: ;Header put here
+    000002D0                        601     .blkb 128

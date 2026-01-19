@@ -1,0 +1,37 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   1 _cpctele    00000000 GR  |   1 _cpctele=   00000009 GR
+    _cpctele=   00000100 G   |     _cpctele=   0000000A G   |   1 _cpctele    000000C4 GR
+  1 _cpctele    0000000A GR  |   1 _cpctele=   00000069 GR  |     _cpctele=   00000100 G
+    _cpctele=   00000060 G   |   1 _cpctele    0000006A GR  |   1 _cpctele=   00000071 GR
+    _cpctele=   00000100 G   |     _cpctele=   00000008 G   |   1 _cpctele    00000072 GR
+  1 _cpctele=   00000077 GR  |     _cpctele=   00000100 G   |     _cpctele=   00000006 G
+  1 _cpctele    00000078 GR  |   1 _cpctele=   00000097 GR  |     _cpctele=   00000100 G
+    _cpctele=   00000020 G   |   1 _cpctele    00000098 GR  |   1 _cpctele=   000000BD GR
+    _cpctele=   00000100 G   |     _cpctele=   00000026 G   |   1 _cpctele    000000BE GR
+  1 _cpctele=   000000C3 GR  |     _cpctele=   00000100 G   |     _cpctele=   00000006 G
+  1 _cpctele=   000000EC GR  |     _cpctele=   00000100 G   |     _cpctele=   00000029 G
+  1 _cpctele    000000ED GR  |   1 _cpctele=   0000014D GR  |     _cpctele=   00000100 G
+    _cpctele=   00000061 G   |   1 _cpctele    0000014E GR  |   1 _cpctele=   00000170 GR
+    _cpctele=   00000100 G   |     _cpctele=   00000023 G   |   1 _cpctele    00000171 GR
+  1 _cpctele=   000001E6 GR  |     _cpctele=   00000100 G   |     _cpctele=   00000076 G
+  1 _cpctele    000001E7 GR  |   1 _cpctele=   00000267 GR  |     _cpctele=   00000100 G
+    _cpctele=   00000081 G   |   1 _cpctele    00000268 GR  |   1 _cpctele=   000002C2 GR
+    _cpctele=   00000100 G   |     _cpctele=   0000005B G   |   1 _cpctele    000002C3 GR
+  1 _cpctele=   00000306 GR  |     _cpctele=   00000100 G   |     _cpctele=   00000044 G
+  1 _cpctele    00000307 GR  |   1 _cpctele=   00000336 GR  |     _cpctele=   00000100 G
+    _cpctele=   00000030 G   |   1 _cpctele    00000337 GR  |   1 _cpctele=   0000038F GR
+    _cpctele=   00000100 G   |     _cpctele=   00000059 G
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size      390   flags    0
+

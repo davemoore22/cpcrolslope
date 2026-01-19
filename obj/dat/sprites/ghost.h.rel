@@ -1,0 +1,41 @@
+XL4
+H 2 areas 25 global symbols
+S _ghost_0_size_z Def00000006
+S _ghost_1_size_z Def00000030
+S _ghost_2_size_z Def00000032
+S _ghost_3_size_z Def00000026
+S _ghost_4_size_z Def00000025
+S _ghost_5_size_z Def0000003A
+S _ghost_6_size_z Def00000056
+S _ghost_7_size_z Def00000067
+S _ghost_8_size_z Def00000035
+S _ghost_0 Ref00000000
+S _ghost_1 Ref00000000
+S _ghost_2 Ref00000000
+S _ghost_3 Ref00000000
+S _ghost_4 Ref00000000
+S _ghost_5 Ref00000000
+S _ghost_6 Ref00000000
+S _ghost_7 Ref00000000
+S _ghost_8 Ref00000000
+S .__.ABS. Def00000000
+S _ghost_0_end Ref00000000
+S _ghost_1_end Ref00000000
+S _ghost_2_end Ref00000000
+S _ghost_3_end Ref00000000
+S _ghost_4_end Ref00000000
+S _ghost_0_size Def00000100
+S _ghost_5_end Ref00000000
+S _ghost_1_size Def00000100
+S _ghost_6_end Ref00000000
+S _ghost_2_size Def00000100
+S _ghost_7_end Ref00000000
+S _ghost_3_size Def00000100
+S _ghost_8_end Ref00000000
+S _ghost_4_size Def00000100
+S _ghost_5_size Def00000100
+S _ghost_6_size Def00000100
+S _ghost_7_size Def00000100
+S _ghost_8_size Def00000100
+A _CODE size 0 flags 0 addr 0
+A SPRITES size 0 flags 0 addr 0

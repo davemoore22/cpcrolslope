@@ -1,0 +1,45 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+  0 ___str_0                                                        000000AA R
+  0 ___str_1                                                        000000B6 R
+  0 ___str_2                                                        000000C2 R
+  0 ___str_3                                                        000000CE R
+  0 ___str_4                                                        000000E9 R
+    _a_page_connect_safe                                            ******** GX
+    _a_page_disconnect_safe                                         ******** GX
+    _asm_fdc_off                                                    ******** GX
+    _asm_fdc_on                                                     ******** GX
+    _asm_load_file                                                  ******** GX
+    _cpct_pageMemory                                                ******** GX
+    _cpct_zx7b_decrunch_s                                           ******** GX
+    _d_disk_table                                               =   00008200 G
+  0 _d_gfx_decompress_to_screen                                     00000054 GR
+  0 _d_gfx_resource_end                                             00000023 GR
+  0 _d_gfx_resource_start                                           00000042 GR
+  0 _d_gfx_resources                                                00000013 GR
+  0 _d_load                                                         00000000 GR
+  0 _d_load_gfx_to_extended_memory                                  0000006F GR
+  0 _d_load_music                                                   000000DA GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size       F5   flags    0
+   1 _DATA                                      size        0   flags    0
+   2 _INITIALIZED                               size        0   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        0   flags    0
+   8 _CABS                                      size        0   flags    8
+

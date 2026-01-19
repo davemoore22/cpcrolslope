@@ -1,0 +1,37 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   1 _snowbal    00000000 GR  |   1 _snowbal=   0000003C GR
+    _snowbal=   00000100 G   |     _snowbal=   0000003D G   |   1 _snowbal    000001F5 GR
+  1 _snowbal    0000003D GR  |   1 _snowbal=   0000007D GR  |     _snowbal=   00000100 G
+    _snowbal=   00000041 G   |   1 _snowbal    0000007E GR  |   1 _snowbal=   000000BC GR
+    _snowbal=   00000100 G   |     _snowbal=   0000003F G   |   1 _snowbal    000000BD GR
+  1 _snowbal=   0000010C GR  |     _snowbal=   00000100 G   |     _snowbal=   00000050 G
+  1 _snowbal    0000010D GR  |   1 _snowbal=   00000150 GR  |     _snowbal=   00000100 G
+    _snowbal=   00000044 G   |   1 _snowbal    00000151 GR  |   1 _snowbal=   000001A4 GR
+    _snowbal=   00000100 G   |     _snowbal=   00000054 G   |   1 _snowbal    000001A5 GR
+  1 _snowbal=   000001F4 GR  |     _snowbal=   00000100 G   |     _snowbal=   00000050 G
+  1 _snowbal=   0000023F GR  |     _snowbal=   00000100 G   |     _snowbal=   0000004B G
+  1 _snowbal    00000240 GR  |   1 _snowbal=   00000295 GR  |     _snowbal=   00000100 G
+    _snowbal=   00000056 G   |   1 _snowbal    00000296 GR  |   1 _snowbal=   000002ED GR
+    _snowbal=   00000100 G   |     _snowbal=   00000058 G   |   1 _snowbal    000002EE GR
+  1 _snowbal=   00000343 GR  |     _snowbal=   00000100 G   |     _snowbal=   00000056 G
+  1 _snowbal    00000344 GR  |   1 _snowbal=   00000381 GR  |     _snowbal=   00000100 G
+    _snowbal=   0000003E G   |   1 _snowbal    00000382 GR  |   1 _snowbal=   000003C3 GR
+    _snowbal=   00000100 G   |     _snowbal=   00000042 G   |   1 _snowbal    000003C4 GR
+  1 _snowbal=   00000406 GR  |     _snowbal=   00000100 G   |     _snowbal=   00000043 G
+  1 _snowbal    00000407 GR  |   1 _snowbal=   00000451 GR  |     _snowbal=   00000100 G
+    _snowbal=   0000004B G   |   1 _snowbal    00000452 GR  |   1 _snowbal=   000004A5 GR
+    _snowbal=   00000100 G   |     _snowbal=   00000054 G
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size      4A6   flags    0
+

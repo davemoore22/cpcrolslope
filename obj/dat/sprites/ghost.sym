@@ -1,0 +1,22 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   1 _ghost_0    00000000 GR  |   1 _ghost_0=   00000005 GR
+  1 _ghost_1    00000006 GR  |   1 _ghost_1=   00000035 GR  |   1 _ghost_2    00000036 GR
+  1 _ghost_2=   00000067 GR  |   1 _ghost_3    00000068 GR  |   1 _ghost_3=   0000008D GR
+  1 _ghost_4    0000008E GR  |   1 _ghost_4=   000000B2 GR  |   1 _ghost_5    000000B3 GR
+  1 _ghost_5=   000000EC GR  |   1 _ghost_6    000000ED GR  |   1 _ghost_6=   00000142 GR
+  1 _ghost_7    00000143 GR  |   1 _ghost_7=   000001A9 GR  |   1 _ghost_8    000001AA GR
+  1 _ghost_8=   000001DE GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size      1DF   flags    0
+

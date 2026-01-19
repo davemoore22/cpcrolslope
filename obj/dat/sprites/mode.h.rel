@@ -1,0 +1,41 @@
+XL4
+H 2 areas 25 global symbols
+S _mode_0_size_z Def00000049
+S _mode_1_size_z Def0000004F
+S _mode_2_size_z Def0000004F
+S _mode_3_size_z Def0000003C
+S _mode_4_size_z Def00000047
+S _mode_5_size_z Def00000047
+S _mode_6_size_z Def00000033
+S _mode_7_size_z Def00000047
+S _mode_8_size_z Def0000003B
+S _mode_0 Ref00000000
+S _mode_1 Ref00000000
+S _mode_2 Ref00000000
+S _mode_3 Ref00000000
+S _mode_4 Ref00000000
+S _mode_5 Ref00000000
+S _mode_6 Ref00000000
+S _mode_7 Ref00000000
+S _mode_8 Ref00000000
+S .__.ABS. Def00000000
+S _mode_0_end Ref00000000
+S _mode_1_end Ref00000000
+S _mode_2_end Ref00000000
+S _mode_3_end Ref00000000
+S _mode_4_end Ref00000000
+S _mode_0_size Def00000100
+S _mode_5_end Ref00000000
+S _mode_1_size Def00000100
+S _mode_6_end Ref00000000
+S _mode_2_size Def00000100
+S _mode_7_end Ref00000000
+S _mode_3_size Def00000100
+S _mode_8_end Ref00000000
+S _mode_4_size Def00000100
+S _mode_5_size Def00000100
+S _mode_6_size Def00000100
+S _mode_7_size Def00000100
+S _mode_8_size Def00000100
+A _CODE size 0 flags 0 addr 0
+A SPRITES size 0 flags 0 addr 0

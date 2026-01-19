@@ -1,0 +1,432 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ISO C Compiler
+                                      3 ; Version 4.5.0 #15242 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module presents
+                                      6 	
+                                      7 	.optsdcc -mz80 sdcccall(1)
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _v_clear_screen
+                                     12 	.globl _v_blank_screen_mode_1
+                                     13 	.globl _u_wait_for_duration_or_kp
+                                     14 	.globl _u_reset_clock
+                                     15 	.globl _u_clock_interrupt
+                                     16 	.globl _d_gfx_decompress_to_screen
+                                     17 	.globl _d_load
+                                     18 	.globl _a_page_disconnect_safe
+                                     19 	.globl _a_page_connect_safe
+                                     20 	.globl _a_clear_sprites
+                                     21 	.globl _cpct_asicRemoveLinesInterruptHandler
+                                     22 	.globl _cpct_asicSetLinesInterruptHandler
+                                     23 	.globl _cpct_asicSetPalette
+                                     24 	.globl _cpct_asicSetPalColour
+                                     25 	.globl _cpct_asicSetBorder
+                                     26 	.globl _cpct_waitVSYNC
+                                     27 	.globl _cpct_scanKeyboard_if
+                                     28 	.globl _p_start
+                                     29 	.globl _p_stop
+                                     30 ;--------------------------------------------------------
+                                     31 ; special function registers
+                                     32 ;--------------------------------------------------------
+                                     33 ;--------------------------------------------------------
+                                     34 ; ram data
+                                     35 ;--------------------------------------------------------
+                                     36 	.area _DATA
+    00000000                         37 _p_interrupt_bg_pulse_tick_30000_274:
+    00000000                         38 	.ds 1
+                                     39 ;--------------------------------------------------------
+                                     40 ; ram data
+                                     41 ;--------------------------------------------------------
+                                     42 	.area _INITIALIZED
+    00000000                         43 _p_int_idx:
+    00000000                         44 	.ds 1
+    00000001                         45 _p_frame_c:
+    00000001                         46 	.ds 1
+    00000002                         47 _p_raster_phase:
+    00000002                         48 	.ds 1
+    00000003                         49 _p_raster_tick:
+    00000003                         50 	.ds 1
+    00000004                         51 _p_star_pulse:
+    00000004                         52 	.ds 1
+    00000005                         53 _p_star_pulse_dir:
+    00000005                         54 	.ds 1
+                                     55 ;--------------------------------------------------------
+                                     56 ; absolute external ram data
+                                     57 ;--------------------------------------------------------
+                                     58 	.area _DABS (ABS)
+                                     59 ;--------------------------------------------------------
+                                     60 ; global & static initialisations
+                                     61 ;--------------------------------------------------------
+                                     62 	.area _HOME
+                                     63 	.area _GSINIT
+                                     64 	.area _GSFINAL
+                                     65 	.area _GSINIT
+                                     66 ;src/presents.c:174: static u8 bg_pulse_tick = 0;
+    00000000 AF               [ 4]   67 	xor	a, a
+    00000001 32r00r00         [13]   68 	ld	(_p_interrupt_bg_pulse_tick_30000_274+0), a
+                                     69 ;--------------------------------------------------------
+                                     70 ; Home
+                                     71 ;--------------------------------------------------------
+                                     72 	.area _HOME
+                                     73 	.area _HOME
+                                     74 ;--------------------------------------------------------
+                                     75 ; code
+                                     76 ;--------------------------------------------------------
+                                     77 	.area _CODE
+                                     78 ;src/presents.c:62: void p_start(void) {
+                                     79 ;	---------------------------------
+                                     80 ; Function p_start
+                                     81 ; ---------------------------------
+    00000000                         82 _p_start::
+                                     83 ;src/presents.c:65: v_blank_screen_mode_1();
+    00000000 CDr00r00         [17]   84 	call	_v_blank_screen_mode_1
+                                     85 ;src/presents.c:66: v_clear_screen();
+    00000003 CDr00r00         [17]   86 	call	_v_clear_screen
+                                     87 ;src/presents.c:69: p_draw_bg();
+    00000006 CDr5Cr00         [17]   88 	call	_p_draw_bg
+                                     89 ;src/presents.c:72: p_reset_timers();
+    00000009 CDr54r00         [17]   90 	call	_p_reset_timers
+                                     91 ;src/presents.c:73: p_add_interrupt();
+    0000000C CDr8Cr00         [17]   92 	call	_p_add_interrupt
+                                     93 ;src/presents.c:74: cpct_asicSetPalette(p_pal_usual, 4);
+    0000000F 11 04 00         [10]   94 	ld	de, #0x0004
+    00000012 21r3Br00         [10]   95 	ld	hl, #_p_pal_usual
+    00000015 CDr00r00         [17]   96 	call	_cpct_asicSetPalette
+                                     97 ;src/presents.c:75: cpct_asicSetBorder(cpctm_asicColor(15, 15, 15));
+    00000018 21 FF 0F         [10]   98 	ld	hl, #0x0fff
+    0000001B CDr00r00         [17]   99 	call	_cpct_asicSetBorder
+                                    100 ;src/presents.c:77: g_clock_on = true;
+    0000001E 21r00r00         [10]  101 	ld	hl, #_g_clock_on
+    00000021 36 01            [10]  102 	ld	(hl), #0x01
+                                    103 ;src/presents.c:78: u_reset_clock();
+    00000023 CDr00r00         [17]  104 	call	_u_reset_clock
+                                    105 ;src/presents.c:79: u_wait_for_duration_or_kp(25);
+    00000026 21 19 00         [10]  106 	ld	hl, #0x0019
+    00000029 CDr00r00         [17]  107 	call	_u_wait_for_duration_or_kp
+                                    108 ;src/presents.c:80: g_clock_on = false;
+    0000002C AF               [ 4]  109 	xor	a, a
+    0000002D 32r00r00         [13]  110 	ld	(_g_clock_on+0), a
+                                    111 ;src/presents.c:83: a_clear_sprites();
+                                    112 ;src/presents.c:84: }
+    00000030 C3r00r00         [10]  113 	jp	_a_clear_sprites
+    00000033                        114 _p_pal_blank:
+    00000033 FF 0F                  115 	.dw #0x0fff
+    00000035 FF 0F                  116 	.dw #0x0fff
+    00000037 FF 0F                  117 	.dw #0x0fff
+    00000039 FF 0F                  118 	.dw #0x0fff
+    0000003B                        119 _p_pal_usual:
+    0000003B FF 0F                  120 	.dw #0x0fff
+    0000003D 1D 05                  121 	.dw #0x051d
+    0000003F 24 03                  122 	.dw #0x0324
+    00000041 68 07                  123 	.dw #0x0768
+    00000043                        124 _p_pal_white:
+    00000043 FF 0F                  125 	.dw #0x0fff
+    00000045 FF 0F                  126 	.dw #0x0fff
+    00000047 FF 0F                  127 	.dw #0x0fff
+    00000049 FF 0F                  128 	.dw #0x0fff
+                                    129 ;src/presents.c:87: void p_stop(void) {
+                                    130 ;	---------------------------------
+                                    131 ; Function p_stop
+                                    132 ; ---------------------------------
+    0000004B                        133 _p_stop::
+                                    134 ;src/presents.c:89: p_remove_interrupt();
+    0000004B CDrD9r01         [17]  135 	call	_p_remove_interrupt
+                                    136 ;src/presents.c:91: v_blank_screen_mode_1();
+    0000004E CDr00r00         [17]  137 	call	_v_blank_screen_mode_1
+                                    138 ;src/presents.c:92: v_clear_screen();
+                                    139 ;src/presents.c:93: }
+    00000051 C3r00r00         [10]  140 	jp	_v_clear_screen
+                                    141 ;src/presents.c:96: static void p_reset_timers(void) {
+                                    142 ;	---------------------------------
+                                    143 ; Function p_reset_timers
+                                    144 ; ---------------------------------
+    00000054                        145 _p_reset_timers:
+                                    146 ;src/presents.c:98: p_int_idx = 0;
+                                    147 ;src/presents.c:99: p_frame_c = 0;
+    00000054 AF               [ 4]  148 	xor	a, a
+    00000055 32r00r00         [13]  149 	ld	(_p_int_idx+0), a
+    00000058 32r01r00         [13]  150 	ld	(_p_frame_c+0), a
+                                    151 ;src/presents.c:100: }
+    0000005B C9               [10]  152 	ret
+                                    153 ;src/presents.c:103: static void p_draw_bg(void) {
+                                    154 ;	---------------------------------
+                                    155 ; Function p_draw_bg
+                                    156 ; ---------------------------------
+    0000005C                        157 _p_draw_bg:
+                                    158 ;src/presents.c:105: if (HW_HAS_128K(g_hw))
+    0000005C 3Ar00r00         [13]  159 	ld	a, (_g_hw)
+    0000005F E6 03            [ 7]  160 	and	a, #0x03
+    00000061 D6 01            [ 7]  161 	sub	a, #0x01
+    00000063 38 06            [12]  162 	jr	C, 00102$
+                                    163 ;src/presents.c:106: d_gfx_decompress_to_screen(GFX_PRESENTS);
+    00000065 AF               [ 4]  164 	xor	a, a
+    00000066 CDr00r00         [17]  165 	call	_d_gfx_decompress_to_screen
+    00000069 18 0F            [12]  166 	jr	00103$
+    0000006B                        167 00102$:
+                                    168 ;src/presents.c:108: a_page_disconnect_safe();
+    0000006B CDr00r00         [17]  169 	call	_a_page_disconnect_safe
+                                    170 ;src/presents.c:109: d_load("PRESENTSSCR", VIDEO_MEM_START);
+    0000006E 11 00 C0         [10]  171 	ld	de, #0xc000
+    00000071 21r80r00         [10]  172 	ld	hl, #___str_0
+    00000074 CDr00r00         [17]  173 	call	_d_load
+                                    174 ;src/presents.c:110: a_page_connect_safe();
+    00000077 CDr00r00         [17]  175 	call	_a_page_connect_safe
+    0000007A                        176 00103$:
+                                    177 ;src/presents.c:112: cpct_asicSetBorder(cpctm_asicColor(15, 15, 15));
+    0000007A 21 FF 0F         [10]  178 	ld	hl, #0x0fff
+                                    179 ;src/presents.c:113: }
+    0000007D C3r00r00         [10]  180 	jp	_cpct_asicSetBorder
+    00000080                        181 ___str_0:
+    00000080 50 52 45 53 45 4E 54   182 	.ascii "PRESENTSSCR"
+             53 53 43 52
+    0000008B 00                     183 	.db 0x00
+                                    184 ;src/presents.c:115: static void p_add_interrupt(void) {
+                                    185 ;	---------------------------------
+                                    186 ; Function p_add_interrupt
+                                    187 ; ---------------------------------
+    0000008C                        188 _p_add_interrupt:
+                                    189 ;src/presents.c:130: cpct_waitVSYNC();
+    0000008C CDr00r00         [17]  190 	call	_cpct_waitVSYNC
+                                    191 ;src/presents.c:132: cpct_asicSetLinesInterruptHandler(p_interrupt, lines, sizeof(lines));
+    0000008F 21 0A 00         [10]  192 	ld	hl, #0x000a
+    00000092 E5               [11]  193 	push	hl
+    00000093 11r9Dr00         [10]  194 	ld	de, #_p_add_interrupt_lines_10000_268
+    00000096 21rA7r00         [10]  195 	ld	hl, #_p_interrupt
+    00000099 CDr00r00         [17]  196 	call	_cpct_asicSetLinesInterruptHandler
+                                    197 ;src/presents.c:133: }
+    0000009C C9               [10]  198 	ret
+    0000009D                        199 _p_add_interrupt_lines_10000_268:
+    0000009D 00                     200 	.db #0x00	; 0
+    0000009E 01                     201 	.db #0x01	; 1
+    0000009F 51                     202 	.db #0x51	; 81	'Q'
+    000000A0 55                     203 	.db #0x55	; 85	'U'
+    000000A1 59                     204 	.db #0x59	; 89	'Y'
+    000000A2 5D                     205 	.db #0x5d	; 93
+    000000A3 61                     206 	.db #0x61	; 97	'a'
+    000000A4 65                     207 	.db #0x65	; 101	'e'
+    000000A5 69                     208 	.db #0x69	; 105	'i'
+    000000A6 6D                     209 	.db #0x6d	; 109	'm'
+                                    210 ;src/presents.c:135: static void p_interrupt(u8 line) __z88dk_fastcall {
+                                    211 ;	---------------------------------
+                                    212 ; Function p_interrupt
+                                    213 ; ---------------------------------
+    000000A7                        214 _p_interrupt:
+    000000A7 4D               [ 4]  215 	ld	c, l
+                                    216 ;src/presents.c:151: if (line == 0) {
+    000000A8 79               [ 4]  217 	ld	a, c
+    000000A9 B7               [ 4]  218 	or	a, a
+    000000AA C2r41r01         [10]  219 	jp	NZ, 00137$
+                                    220 ;src/presents.c:153: if (p_int_idx == 0) {
+    000000AD 3Ar00r00         [13]  221 	ld	a, (_p_int_idx+0)
+    000000B0 B7               [ 4]  222 	or	a, a
+    000000B1 20 12            [12]  223 	jr	NZ, 00104$
+                                    224 ;src/presents.c:154: if (++p_frame_c == FC_MAX)
+    000000B3 FD 21r01r00      [14]  225 	ld	iy, #_p_frame_c
+    000000B7 FD 34 00         [23]  226 	inc	0 (iy)
+    000000BA 3Ar01r00         [13]  227 	ld	a, (_p_frame_c+0)
+    000000BD D6 32            [ 7]  228 	sub	a, #0x32
+    000000BF 20 04            [12]  229 	jr	NZ, 00104$
+                                    230 ;src/presents.c:155: p_frame_c = 0;
+    000000C1 FD 36 00 00      [19]  231 	ld	0 (iy), #0x00
+    000000C5                        232 00104$:
+                                    233 ;src/presents.c:158: if (p_int_idx == 1)
+    000000C5 3Ar00r00         [13]  234 	ld	a, (_p_int_idx+0)
+    000000C8 3D               [ 4]  235 	dec	a
+    000000C9 20 03            [12]  236 	jr	NZ, 00106$
+                                    237 ;src/presents.c:159: cpct_scanKeyboard_if();
+    000000CB CDr00r00         [17]  238 	call	_cpct_scanKeyboard_if
+    000000CE                        239 00106$:
+                                    240 ;src/presents.c:161: if (p_int_idx == 2)
+    000000CE 3Ar00r00         [13]  241 	ld	a, (_p_int_idx+0)
+    000000D1 D6 02            [ 7]  242 	sub	a, #0x02
+    000000D3 20 03            [12]  243 	jr	NZ, 00108$
+                                    244 ;src/presents.c:162: u_clock_interrupt();
+    000000D5 CDr00r00         [17]  245 	call	_u_clock_interrupt
+    000000D8                        246 00108$:
+                                    247 ;src/presents.c:164: if (p_int_idx == 3) {
+    000000D8 3Ar00r00         [13]  248 	ld	a, (_p_int_idx+0)
+    000000DB D6 03            [ 7]  249 	sub	a, #0x03
+    000000DD 20 12            [12]  250 	jr	NZ, 00112$
+                                    251 ;src/presents.c:166: p_raster_phase++;
+    000000DF FD 21r02r00      [14]  252 	ld	iy, #_p_raster_phase
+    000000E3 FD 34 00         [23]  253 	inc	0 (iy)
+                                    254 ;src/presents.c:167: if (p_raster_phase >= RASTER_COLOUR_COUNT)
+    000000E6 3Ar02r00         [13]  255 	ld	a, (_p_raster_phase+0)
+    000000E9 D6 15            [ 7]  256 	sub	a, #0x15
+    000000EB 38 04            [12]  257 	jr	C, 00112$
+                                    258 ;src/presents.c:168: p_raster_phase = 0;
+    000000ED FD 36 00 00      [19]  259 	ld	0 (iy), #0x00
+    000000F1                        260 00112$:
+                                    261 ;src/presents.c:171: if (p_int_idx == 4) {
+    000000F1 3Ar00r00         [13]  262 	ld	a, (_p_int_idx+0)
+    000000F4 D6 04            [ 7]  263 	sub	a, #0x04
+    000000F6 20 37            [12]  264 	jr	NZ, 00121$
+                                    265 ;src/presents.c:175: if (++bg_pulse_tick >= BG_PULSE_SPEED) {
+    000000F8 FD 21r00r00      [14]  266 	ld	iy, #_p_interrupt_bg_pulse_tick_30000_274
+    000000FC FD 34 00         [23]  267 	inc	0 (iy)
+    000000FF 3Ar00r00         [13]  268 	ld	a, (_p_interrupt_bg_pulse_tick_30000_274+0)
+    00000102 D6 02            [ 7]  269 	sub	a, #0x02
+    00000104 38 29            [12]  270 	jr	C, 00121$
+                                    271 ;src/presents.c:176: bg_pulse_tick = 0;
+    00000106 FD 36 00 00      [19]  272 	ld	0 (iy), #0x00
+                                    273 ;src/presents.c:178: p_star_pulse += p_star_pulse_dir;
+    0000010A 3Ar04r00         [13]  274 	ld	a, (_p_star_pulse)
+    0000010D 21r05r00         [10]  275 	ld	hl, #_p_star_pulse_dir
+    00000110 86               [ 7]  276 	add	a, (hl)
+                                    277 ;src/presents.c:180: if (p_star_pulse >= BG_PULSE_MAX) {
+    00000111 32r04r00         [13]  278 	ld	(_p_star_pulse+0), a
+    00000114 D6 0C            [ 7]  279 	sub	a, #0x0c
+    00000116 38 0C            [12]  280 	jr	C, 00116$
+                                    281 ;src/presents.c:181: p_star_pulse = BG_PULSE_MAX;
+    00000118 21r04r00         [10]  282 	ld	hl, #_p_star_pulse
+    0000011B 36 0C            [10]  283 	ld	(hl), #0x0c
+                                    284 ;src/presents.c:182: p_star_pulse_dir = -1;
+    0000011D 21r05r00         [10]  285 	ld	hl, #_p_star_pulse_dir
+    00000120 36 FF            [10]  286 	ld	(hl), #0xff
+    00000122 18 0B            [12]  287 	jr	00121$
+    00000124                        288 00116$:
+                                    289 ;src/presents.c:183: } else if (p_star_pulse == 0) {
+    00000124 3Ar04r00         [13]  290 	ld	a, (_p_star_pulse+0)
+    00000127 B7               [ 4]  291 	or	a, a
+    00000128 20 05            [12]  292 	jr	NZ, 00121$
+                                    293 ;src/presents.c:184: p_star_pulse_dir = 1;
+    0000012A 21r05r00         [10]  294 	ld	hl, #_p_star_pulse_dir
+    0000012D 36 01            [10]  295 	ld	(hl), #0x01
+    0000012F                        296 00121$:
+                                    297 ;src/presents.c:189: if (++p_int_idx == 6)
+    0000012F FD 21r00r00      [14]  298 	ld	iy, #_p_int_idx
+    00000133 FD 34 00         [23]  299 	inc	0 (iy)
+    00000136 3Ar00r00         [13]  300 	ld	a, (_p_int_idx+0)
+    00000139 D6 06            [ 7]  301 	sub	a, #0x06
+    0000013B C0               [11]  302 	ret	NZ
+                                    303 ;src/presents.c:190: p_int_idx = 0;
+    0000013C FD 36 00 00      [19]  304 	ld	0 (iy), #0x00
+    00000140 C9               [10]  305 	ret
+    00000141                        306 00137$:
+                                    307 ;src/presents.c:192: } else if (line == RASTER_RESET_LINE) {
+    00000141 79               [ 4]  308 	ld	a, c
+    00000142 3D               [ 4]  309 	dec	a
+    00000143 20 21            [12]  310 	jr	NZ, 00134$
+                                    311 ;src/presents.c:193: cpct_asicSetPalColour(0, p_pal_usual[0]);
+    00000145 ED 5Br3Br00      [20]  312 	ld	de, (#_p_pal_usual + 0)
+    00000149 21 00 00         [10]  313 	ld	hl, #0x0000
+    0000014C CDr00r00         [17]  314 	call	_cpct_asicSetPalColour
+                                    315 ;src/presents.c:195: cpctm_asicColor(p_star_pulse, 0, p_star_pulse));
+    0000014F 3Ar04r00         [13]  316 	ld	a, (_p_star_pulse)
+    00000152 E6 0F            [ 7]  317 	and	a, #0x0f
+    00000154 5F               [ 4]  318 	ld	e, a
+    00000155 16 00            [ 7]  319 	ld	d, #0x00
+    00000157 6B               [ 4]  320 	ld	l, e
+    00000158 62               [ 4]  321 	ld	h, d
+    00000159 29               [11]  322 	add	hl, hl
+    0000015A 29               [11]  323 	add	hl, hl
+    0000015B 29               [11]  324 	add	hl, hl
+    0000015C 29               [11]  325 	add	hl, hl
+    0000015D 7D               [ 4]  326 	ld	a, l
+    0000015E B3               [ 4]  327 	or	a, e
+                                    328 ;src/presents.c:194: cpct_asicSetPalColour(1, /* Star colour */
+    0000015F 5F               [ 4]  329 	ld	e, a
+    00000160 21 01 00         [10]  330 	ld	hl, #0x0001
+    00000163 C3r00r00         [10]  331 	jp	_cpct_asicSetPalColour
+    00000166                        332 00134$:
+                                    333 ;src/presents.c:197: } else if (line == TEXT_RASTER_Y_END) {
+    00000166 79               [ 4]  334 	ld	a, c
+    00000167 D6 6D            [ 7]  335 	sub	a, #0x6d
+    00000169 20 0A            [12]  336 	jr	NZ, 00131$
+                                    337 ;src/presents.c:199: cpct_asicSetPalColour(2, p_pal_usual[2]);
+    0000016B ED 5Br3Fr00      [20]  338 	ld	de, (#(_p_pal_usual + 4) + 0)
+    0000016F 21 02 00         [10]  339 	ld	hl, #0x0002
+    00000172 C3r00r00         [10]  340 	jp	_cpct_asicSetPalColour
+    00000175                        341 00131$:
+                                    342 ;src/presents.c:200: } else if (line < TEXT_RASTER_Y_START || line > TEXT_RASTER_Y_END) {
+    00000175 79               [ 4]  343 	ld	a, c
+    00000176 D6 51            [ 7]  344 	sub	a, #0x51
+    00000178 D8               [11]  345 	ret	C
+    00000179 3E 6D            [ 7]  346 	ld	a, #0x6d
+    0000017B 91               [ 4]  347 	sub	a, c
+                                    348 ;src/presents.c:201: return;
+    0000017C D8               [11]  349 	ret	C
+                                    350 ;src/presents.c:205: u8 band = (line - TEXT_RASTER_Y_START) >> 2;
+    0000017D 79               [ 4]  351 	ld	a, c
+    0000017E 06 00            [ 7]  352 	ld	b, #0x00
+    00000180 C6 AF            [ 7]  353 	add	a, #0xaf
+    00000182 4F               [ 4]  354 	ld	c, a
+    00000183 78               [ 4]  355 	ld	a, b
+    00000184 CE FF            [ 7]  356 	adc	a, #0xff
+    00000186 47               [ 4]  357 	ld	b, a
+    00000187 CB 28            [ 8]  358 	sra	b
+    00000189 CB 19            [ 8]  359 	rr	c
+    0000018B CB 28            [ 8]  360 	sra	b
+    0000018D CB 19            [ 8]  361 	rr	c
+    0000018F 79               [ 4]  362 	ld	a, c
+                                    363 ;src/presents.c:208: u8 idx = band + RASTER_COLOUR_COUNT - p_raster_phase;
+    00000190 C6 15            [ 7]  364 	add	a, #0x15
+    00000192 21r02r00         [10]  365 	ld	hl, #_p_raster_phase
+    00000195 96               [ 7]  366 	sub	a, (hl)
+                                    367 ;src/presents.c:209: if (idx >= RASTER_COLOUR_COUNT)
+    00000196 6F               [ 4]  368 	ld	l, a
+    00000197 D6 15            [ 7]  369 	sub	a, #0x15
+    00000199 38 04            [12]  370 	jr	C, 00125$
+                                    371 ;src/presents.c:210: idx -= RASTER_COLOUR_COUNT;
+    0000019B 7D               [ 4]  372 	ld	a, l
+    0000019C C6 EB            [ 7]  373 	add	a, #0xeb
+    0000019E 6F               [ 4]  374 	ld	l, a
+    0000019F                        375 00125$:
+                                    376 ;src/presents.c:215: cpct_asicSetPalColour(2, p_raster_colours[idx]);
+    0000019F 01rAFr01         [10]  377 	ld	bc, #_p_interrupt_p_raster_colours_10000_270+0
+    000001A2 26 00            [ 7]  378 	ld	h, #0x00
+    000001A4 29               [11]  379 	add	hl, hl
+    000001A5 09               [11]  380 	add	hl, bc
+    000001A6 5E               [ 7]  381 	ld	e, (hl)
+    000001A7 23               [ 6]  382 	inc	hl
+    000001A8 56               [ 7]  383 	ld	d, (hl)
+    000001A9 21 02 00         [10]  384 	ld	hl, #0x0002
+                                    385 ;src/presents.c:217: }
+    000001AC C3r00r00         [10]  386 	jp	_cpct_asicSetPalColour
+    000001AF                        387 _p_interrupt_p_raster_colours_10000_270:
+    000001AF E6 00                  388 	.dw #0x00e6
+    000001B1 F4 00                  389 	.dw #0x00f4
+    000001B3 F2 00                  390 	.dw #0x00f2
+    000001B5 F0 01                  391 	.dw #0x01f0
+    000001B7 F0 03                  392 	.dw #0x03f0
+    000001B9 F0 05                  393 	.dw #0x05f0
+    000001BB F0 07                  394 	.dw #0x07f0
+    000001BD F0 09                  395 	.dw #0x09f0
+    000001BF F0 0B                  396 	.dw #0x0bf0
+    000001C1 E0 0E                  397 	.dw #0x0ee0
+    000001C3 B0 0E                  398 	.dw #0x0eb0
+    000001C5 80 0E                  399 	.dw #0x0e80
+    000001C7 42 0D                  400 	.dw #0x0d42
+    000001C9 23 0C                  401 	.dw #0x0c23
+    000001CB 24 0B                  402 	.dw #0x0b24
+    000001CD 26 09                  403 	.dw #0x0926
+    000001CF 38 07                  404 	.dw #0x0738
+    000001D1 58 05                  405 	.dw #0x0558
+    000001D3 77 03                  406 	.dw #0x0377
+    000001D5 96 02                  407 	.dw #0x0296
+    000001D7 C6 01                  408 	.dw #0x01c6
+                                    409 ;src/presents.c:219: static void p_remove_interrupt(void) {
+                                    410 ;	---------------------------------
+                                    411 ; Function p_remove_interrupt
+                                    412 ; ---------------------------------
+    000001D9                        413 _p_remove_interrupt:
+                                    414 ;src/presents.c:221: cpct_asicRemoveLinesInterruptHandler();
+                                    415 ;src/presents.c:222: }
+    000001D9 C3r00r00         [10]  416 	jp	_cpct_asicRemoveLinesInterruptHandler
+                                    417 	.area _CODE
+                                    418 	.area _INITIALIZER
+    00000000                        419 __xinit__p_int_idx:
+    00000000 00                     420 	.db #0x00	; 0
+    00000001                        421 __xinit__p_frame_c:
+    00000001 00                     422 	.db #0x00	; 0
+    00000002                        423 __xinit__p_raster_phase:
+    00000002 00                     424 	.db #0x00	; 0
+    00000003                        425 __xinit__p_raster_tick:
+    00000003 00                     426 	.db #0x00	; 0
+    00000004                        427 __xinit__p_star_pulse:
+    00000004 00                     428 	.db #0x00	; 0
+    00000005                        429 __xinit__p_star_pulse_dir:
+    00000005 01                     430 	.db #0x01	;  1
+                                    431 	.area _CABS (ABS)

@@ -1,0 +1,13 @@
+XL4
+H 1 areas 2 global symbols
+S .__.ABS. Def00000000
+A _CODE size 15 flags 0 addr 0
+S _a_crtc_set_start Def00000000
+T 00 00 00 00
+R 00 00 00 00
+T 00 00 00 00
+R 00 00 00 00
+T 00 00 00 00 01 BC 00 3E 0C ED 79 04 7C ED 79 05
+R 00 00 00 00
+T 0C 00 00 00 3E 0D ED 79 04 7D ED 79 C9
+R 00 00 00 00

@@ -1,0 +1,38 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |   0 ADBUFFER    000002C8 R   |   0 BTBUFF      0000020D R
+  0 BTENTLP     00000209 R   |   0 BTESECT     00000230 R   |   0 BTFOUND     00000240 R
+  0 BTLOOP      000001F6 R   |   0 BTNEXT      0000021C R   |   0 BTNOFND     0000023C R
+  0 BTSECT      000001F8 R   |   0 BUFHEAD     000002D0 R   |   0 BUILDTAB    000001D0 R
+  0 CM2         00000268 R   |   0 CMP         00000266 R   |   0 CMPNOT      00000274 R
+  0 CONV        00000276 R   |   0 CVNEXT      00000278 R   |   0 CVP2        0000029B R
+    DIRFSECT=   000000C1     |     DIRTRACK=   00000000     |   0 DIV9        000002AA R
+  0 DIV91       000002AF R   |   0 DIV92       000002B7 R   |   0 ERRFNF      000001CC R
+  0 ERROR       00000025 R   |   0 FDCDRIVE    000002BD R   |   0 FDCHEAD     000002BE R
+  0 FDCIDDR     000002BF R   |   0 FDCMOTOR    000002BC R   |   0 FDCOFF      0000005F R
+  0 FDCON       00000043 R   |   0 FDCVARS     00000032 R   |   0 FILFOUND    000002C3 R
+  0 GETFD2      000000E2 R   |   0 GETFDC      000000DF R   |   0 GOTOPIST    000000EB R
+  0 LF_TABOK    0000007C R   |   0 LOADFILE    0000006A R   |   0 LOADFOK     000000B2 R
+  0 LOADLP      00000085 R   |   0 LOADNEXT    000000AC R   |   0 LOADWHER    000002C6 R
+    NBMAXENT=   00000004     |   0 PTFILENM    000002CA R   |   0 PUTFD2      000000D5 R
+  0 PUTFDC      000000D1 R   |   0 READSECT    000000FE R   |   0 RESTE       000002C4 R
+  0 RESTORE_    0000001C R   |   0 RESTORE_    00000020 R   |   0 RSAVLOOP    00000159 R
+  0 RSFIN       00000183 R   |   0 RSLOOP      00000160 R   |   0 RSPIST      00000113 R
+  0 RSSKIPLP    00000141 R   |   0 RSTarget    00000159 R   |   0 RSWASTE     00000174 R
+  0 SKIPBYTE    00000138 R   |   0 ST0         000002C0 R   |   0 ST1         000002C1 R
+  0 ST2         000002C2 R   |   0 TABSECTS    000002CE R   |   0 TESTEJEC    000001C4 R
+  0 TESTFAIL    000001C8 R   |   0 TOREAD      000002CC R   |   0 WAIT        00000057 R
+  0 WAITEND     000000B4 R   |   0 _asm_fdc    0000005F GR  |   0 _asm_fdc    00000043 GR
+  0 _asm_loa    00000000 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size      350   flags    0
+

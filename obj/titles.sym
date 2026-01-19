@@ -1,0 +1,128 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    ___sdcc_call_iy                                                 ******** GX
+    ___sdcc_enter_ix                                                ******** GX
+  0 ___str_0                                                        0000023D R
+  7 __xinit__g_game_mode                                            00000000 R
+  7 __xinit__slopes_dir                                             00000006 R
+  7 __xinit__slopes_phase                                           00000005 R
+  7 __xinit__slopes_tick                                            00000007 R
+  7 __xinit__t_frame_c                                              00000002 R
+  7 __xinit__t_int_idx                                              00000001 R
+  7 __xinit__t_mode_cooldown                                        00000009 R
+  7 __xinit__t_roland_right                                         00000008 R
+  7 __xinit__text_phase                                             00000003 R
+  7 __xinit__text_tick                                              00000004 R
+    _a_blank_hardware_sprite_palette                                ******** GX
+    _a_clear_sprites                                                ******** GX
+    _a_hide_sprite_range                                            ******** GX
+    _a_load_hw_sprite                                               ******** GX
+    _a_page_connect_safe                                            ******** GX
+    _a_page_disconnect_safe                                         ******** GX
+    _a_set_hardware_sprite_palette                                  ******** GX
+    _c_sprite_cache_bank_upload                                     ******** GX
+    _cpct_PLY_AKG_Init                                              ******** GX
+    _cpct_PLY_AKG_Play                                              ******** GX
+    _cpct_asicRemoveLinesInterruptHandler                           ******** GX
+    _cpct_asicSetBorder                                             ******** GX
+    _cpct_asicSetLinesInterruptHandler                              ******** GX
+    _cpct_asicSetPalColour                                          ******** GX
+    _cpct_asicSetPalette                                            ******** GX
+    _cpct_asicSetSpritePosition                                     ******** GX
+    _cpct_asicSetSpriteZoom                                         ******** GX
+    _cpct_isKeyPressed                                              ******** GX
+    _cpct_scanKeyboard_if                                           ******** GX
+    _cpct_waitVSYNC                                                 ******** GX
+    _d_gfx_decompress_to_screen                                     ******** GX
+    _d_load                                                         ******** GX
+  2 _g_game_mode                                                    00000000 GR
+    _g_hw                                                           ******** GX
+  0 _roland_band_colours                                            00000060 R
+    _roland_sprites_palette                                         ******** GX
+  2 _slopes_dir                                                     00000006 R
+  2 _slopes_phase                                                   00000005 R
+  2 _slopes_tick                                                    00000007 R
+  0 _t_add_interrupt                                                00000249 R
+  0 _t_add_interrupt_lines_10000_300                                0000025A R
+  0 _t_ani_roland_l                                                 0000040F R
+  0 _t_ani_roland_r                                                 00000429 R
+  0 _t_change_game_mode                                             000005FE R
+  0 _t_do                                                           000000B6 GR
+  0 _t_draw_bg                                                      00000220 R
+  0 _t_draw_game_mode                                               000001BA R
+  0 _t_draw_static_sprites                                          00000117 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+  2 _t_frame_c                                                      00000002 R
+  0 _t_init_roland_slots                                            00000512 R
+  2 _t_int_idx                                                      00000001 R
+  0 _t_interrupt                                                    0000026A R
+  0 _t_load_game_mode_word                                          0000059F R
+  0 _t_load_roland_from_cache                                       000004D8 R
+  0 _t_load_static_title_sprites                                    0000054A R
+  2 _t_mode_cooldown                                                00000009 R
+  0 _t_pal_blank                                                    0000006E R
+  0 _t_pal_ice                                                      000000A6 R
+  0 _t_pal_middle                                                   0000009E R
+  0 _t_pal_slopes                                                   0000008E R
+  0 _t_pal_text                                                     000000AE R
+  0 _t_pal_top                                                      00000076 R
+  0 _t_pal_trees                                                    00000096 R
+  0 _t_poll_title_input                                             00000644 R
+  1 _t_poll_title_input_left_was_down_10000_354                     00000009 R
+  1 _t_poll_title_input_right_was_down_10000_354                    0000000A R
+  0 _t_remove_interrupt                                             00000267 R
+  0 _t_reset_timers                                                 000001B2 R
+  1 _t_roland_active                                                00000008 R
+  1 _t_roland_end_x                                                 00000004 R
+  2 _t_roland_right                                                 00000008 R
+  1 _t_roland_start_x                                               00000002 R
+  1 _t_roland_step                                                  00000006 R
+  1 _t_roland_x                                                     00000000 R
+  1 _t_roland_y                                                     00000007 R
+  0 _t_scroll_sprite_h                                              0000044B R
+  0 _t_slopes_ramp                                                  0000007E R
+  0 _t_start                                                        00000000 GR
+  0 _t_start_roland_scroll                                          00000682 R
+  0 _t_step_slopes_phase                                            000003F0 R
+  0 _t_stop                                                         0000010E GR
+  0 _t_update_roland                                                000006D0 R
+  0 _t_update_slopes_cycle                                          000003BE R
+  0 _text_col_bottom                                                00000050 R
+  0 _text_col_top                                                   00000040 R
+  2 _text_phase                                                     00000003 R
+  2 _text_tick                                                      00000004 R
+    _titles_sprites_data                                            ******** GX
+    _titles_sprites_palette_classic                                 ******** GX
+    _titles_sprites_palette_mania                                   ******** GX
+    _titles_sprites_palette_zen                                     ******** GX
+    _v_blank_screen_mode_1                                          ******** GX
+    _v_clear_screen                                                 ******** GX
+    _v_set_title_roland_sprite_pos                                  ******** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 3
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size      75E   flags    0
+   1 _DATA                                      size        B   flags    0
+   2 _INITIALIZED                               size        A   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        7   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        A   flags    0
+   8 _CABS                                      size        0   flags    8
+

@@ -1,0 +1,37 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.=   00002710 L   |     .__.ABS.=   00000000 G   |     .__.CPU.=   00000000 L
+    .__.H$L.=   00000000 L   |     _cpctele    ******** GX  |     _cpctele    ******** GX
+    _cpctele=   00000100 G   |     _cpctele=   0000000A G   |     _cpctele    ******** GX
+    _cpctele    ******** GX  |     _cpctele    ******** GX  |     _cpctele=   00000100 G
+    _cpctele=   00000060 G   |     _cpctele    ******** GX  |     _cpctele    ******** GX
+    _cpctele=   00000100 G   |     _cpctele=   00000008 G   |     _cpctele    ******** GX
+    _cpctele    ******** GX  |     _cpctele=   00000100 G   |     _cpctele=   00000006 G
+    _cpctele    ******** GX  |     _cpctele    ******** GX  |     _cpctele=   00000100 G
+    _cpctele=   00000020 G   |     _cpctele    ******** GX  |     _cpctele    ******** GX
+    _cpctele=   00000100 G   |     _cpctele=   00000026 G   |     _cpctele    ******** GX
+    _cpctele    ******** GX  |     _cpctele=   00000100 G   |     _cpctele=   00000006 G
+    _cpctele    ******** GX  |     _cpctele=   00000100 G   |     _cpctele=   00000029 G
+    _cpctele    ******** GX  |     _cpctele    ******** GX  |     _cpctele=   00000100 G
+    _cpctele=   00000061 G   |     _cpctele    ******** GX  |     _cpctele    ******** GX
+    _cpctele=   00000100 G   |     _cpctele=   00000023 G   |     _cpctele    ******** GX
+    _cpctele    ******** GX  |     _cpctele=   00000100 G   |     _cpctele=   00000076 G
+    _cpctele    ******** GX  |     _cpctele    ******** GX  |     _cpctele=   00000100 G
+    _cpctele=   00000081 G   |     _cpctele    ******** GX  |     _cpctele    ******** GX
+    _cpctele=   00000100 G   |     _cpctele=   0000005B G   |     _cpctele    ******** GX
+    _cpctele    ******** GX  |     _cpctele=   00000100 G   |     _cpctele=   00000044 G
+    _cpctele    ******** GX  |     _cpctele    ******** GX  |     _cpctele=   00000100 G
+    _cpctele=   00000030 G   |     _cpctele    ******** GX  |     _cpctele    ******** GX
+    _cpctele=   00000100 G   |     _cpctele=   00000059 G
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE      size        0   flags    0
+   1 SPRITES    size        0   flags    0
+

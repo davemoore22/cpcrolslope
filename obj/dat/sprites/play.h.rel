@@ -1,0 +1,17 @@
+XL4
+H 2 areas D global symbols
+S _play_2_size Def00000100
+S _play_0_size_z Def00000048
+S _play_1_size_z Def00000040
+S _play_2_size_z Def00000012
+S .__.ABS. Def00000000
+S _play_0 Ref00000000
+S _play_1 Ref00000000
+S _play_2 Ref00000000
+S _play_0_end Ref00000000
+S _play_1_end Ref00000000
+S _play_2_end Ref00000000
+S _play_0_size Def00000100
+S _play_1_size Def00000100
+A _CODE size 0 flags 0 addr 0
+A SPRITES size 0 flags 0 addr 0

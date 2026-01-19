@@ -1,0 +1,63 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 1
+Hexadecimal [32-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =   00002710 L
+    .__.ABS.                                                    =   00000000 G
+    .__.CPU.                                                    =   00000000 L
+    .__.H$L.                                                    =   00000000 L
+    ___sdcc_enter_ix                                                ******** GX
+  7 __xinit__a_asic_paged                                           00000000 R
+  2 _a_asic_paged                                                   00000000 R
+  0 _a_blank_hardware_sprite_palette                                00000069 GR
+  0 _a_clear_all_sprites                                            00000226 GR
+  0 _a_clear_sprites                                                00000197 GR
+  0 _a_hide_sprite                                                  00000255 GR
+  0 _a_hide_sprite_range                                            000001FA GR
+  0 _a_load_cpctelera_sprites                                       000000B5 GR
+  0 _a_load_ghost_sprites                                           0000008B GR
+  0 _a_load_hw_sprite                                               000000C3 GR
+  0 _a_load_roland_sprites                                          0000007D GR
+  0 _a_load_snowball_sprites                                        000000A7 GR
+  0 _a_load_spider_sprites                                          00000099 GR
+  0 _a_load_sprite_range                                            000001B7 GR
+  0 _a_load_sprite_set                                              00000118 GR
+  0 _a_page_connect_safe                                            00000293 GR
+  0 _a_page_disconnect_safe                                         000002A2 GR
+  0 _a_set_hardware_sprite_palette                                  00000063 GR
+  0 _a_set_sprite_zoom_range                                        00000260 GR
+  0 _a_show_sprite                                                  00000246 GR
+  0 _a_sprite_flip_horizontal_inplace                               00000000 GR
+    _cpct_asicCopySpriteData                                        ******** GX
+    _cpct_asicPageConnect                                           ******** GX
+    _cpct_asicPageDisconnect                                        ******** GX
+    _cpct_asicSetSpritePalColour                                    ******** GX
+    _cpct_asicSetSpritePalette                                      ******** GX
+    _cpct_asicSetSpritePosition                                     ******** GX
+    _cpct_asicSetSpriteZoom                                         ******** GX
+    _cpct_memset                                                    ******** GX
+    _cpct_waitVSYNCStart                                            ******** GX
+    _cpct_zx7b_decrunch_s                                           ******** GX
+    _cpctelera_sprites_data                                         ******** GX
+    _ghost_sprites_data                                             ******** GX
+    _roland_sprites_data                                            ******** GX
+    _snowball_sprites_data                                          ******** GX
+    _spider_sprites_data                                            ******** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
+Hexadecimal [32-Bits]
+
+Area Table
+
+   0 _CODE                                      size      2B0   flags    0
+   1 _DATA                                      size        0   flags    0
+   2 _INITIALIZED                               size        1   flags    0
+   3 _DABS                                      size        0   flags    8
+   4 _HOME                                      size        0   flags    0
+   5 _GSINIT                                    size        0   flags    0
+   6 _GSFINAL                                   size        0   flags    0
+   7 _INITIALIZER                               size        1   flags    0
+   8 _CABS                                      size        0   flags    8
+
