@@ -72,14 +72,14 @@ _last_frame:
 _v_blank_screen_no_asic::
 ;src/lib/video.c:29: cpct_setPalette(black_palette, 4);
 	ld	de, #0x0004
-	ld	hl, #_v_blank_screen_no_asic_black_palette_10000_254
+	ld	hl, #_v_blank_screen_no_asic_black_palette_10000_256
 	call	_cpct_setPalette
 ;src/lib/video.c:30: cpct_setBorder(HW_BLACK);
 	ld	l, #0x14
 	ld	a, #0x10
 ;src/lib/video.c:31: }
 	jp	_cpct_setPALColour
-_v_blank_screen_no_asic_black_palette_10000_254:
+_v_blank_screen_no_asic_black_palette_10000_256:
 	.dw #0x0014
 	.dw #0x0014
 	.dw #0x0014
@@ -93,13 +93,13 @@ _v_blank_screen_mode_1::
 	call	_cpct_waitVSYNC
 ;src/lib/video.c:41: cpct_asicSetPalette(palette, 4);
 	ld	de, #0x0004
-	ld	hl, #_v_blank_screen_mode_1_palette_10000_256
+	ld	hl, #_v_blank_screen_mode_1_palette_10000_258
 	call	_cpct_asicSetPalette
 ;src/lib/video.c:42: cpct_asicSetBorder(cpctm_asicColor(15, 15, 15));
 	ld	hl, #0x0fff
 ;src/lib/video.c:43: }
 	jp	_cpct_asicSetBorder
-_v_blank_screen_mode_1_palette_10000_256:
+_v_blank_screen_mode_1_palette_10000_258:
 	.dw #0x0fff
 	.dw #0x0fff
 	.dw #0x0fff
@@ -520,7 +520,7 @@ _v_set_intro_spider_sprite_pos::
 	ld	h, #0x00
 	add	hl, hl
 	add	hl, hl
-	ld	de, #_v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_285
+	ld	de, #_v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_287
 	add	hl, de
 	ld	c, l
 	ld	b, h
@@ -586,7 +586,7 @@ _v_set_intro_spider_sprite_pos::
 	pop	hl
 	inc	sp
 	jp	(hl)
-_v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_285:
+_v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_287:
 	.db #0x00	; 0
 	.db #0x01	; 1
 	.db #0x06	; 6
@@ -637,7 +637,7 @@ _v_set_intro_snowball_sprite_pos::
 	ld	h, #0x00
 	add	hl, hl
 	add	hl, hl
-	ld	de, #_v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_290
+	ld	de, #_v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_292
 	add	hl, de
 	ld	c, l
 	ld	b, h
@@ -703,7 +703,7 @@ _v_set_intro_snowball_sprite_pos::
 	pop	hl
 	inc	sp
 	jp	(hl)
-_v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_290:
+_v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_292:
 	.db #0x00	; 0
 	.db #0x01	; 1
 	.db #0x08	; 8
@@ -746,7 +746,7 @@ _v_spider_set_frame::
 	ld	h, #0x00
 	add	hl, hl
 	add	hl, hl
-	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_294
+	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_296
 	add	hl, de
 	ld	e, b
 	ld	d, #0x00
@@ -773,7 +773,7 @@ _v_spider_set_frame::
 	ld	h, #0x00
 	add	hl, hl
 	add	hl, hl
-	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_294
+	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_296
 	add	hl, de
 	ld	e, b
 	ld	d, #0x00
@@ -794,7 +794,7 @@ _v_spider_set_frame::
 	ld	(hl), c
 ;src/lib/video.c:290: }
 	ret
-_v_spider_set_frame_spider_frame_sprites_10000_294:
+_v_spider_set_frame_spider_frame_sprites_10000_296:
 	.db #0x00	; 0
 	.db #0x01	; 1
 	.db #0x06	; 6
@@ -833,7 +833,7 @@ _v_snowball_set_frame::
 	ld	h, #0x00
 	add	hl, hl
 	add	hl, hl
-	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_299
+	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_301
 	add	hl, de
 	ld	e, b
 	ld	d, #0x00
@@ -860,7 +860,7 @@ _v_snowball_set_frame::
 	ld	h, #0x00
 	add	hl, hl
 	add	hl, hl
-	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_299
+	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_301
 	add	hl, de
 	ld	e, b
 	ld	d, #0x00
@@ -881,7 +881,7 @@ _v_snowball_set_frame::
 	ld	(hl), c
 ;src/lib/video.c:312: }
 	ret
-_v_snowball_set_frame_snowball_frame_sprites_10000_299:
+_v_snowball_set_frame_snowball_frame_sprites_10000_301:
 	.db #0x00	; 0
 	.db #0x01	; 1
 	.db #0x08	; 8

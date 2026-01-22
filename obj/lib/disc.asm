@@ -230,8 +230,8 @@ ___str_3:
 _d_load_music::
 ;src/lib/disc.c:88: a_page_disconnect_safe();
 	call	_a_page_disconnect_safe
-;src/lib/disc.c:89: d_load("MUSIC   BIN", MUSIC_LOC);
-	ld	de, #0xb000
+;src/lib/disc.c:89: d_load("MUSIC   BIN", TITLE_MUSIC_LOC);
+	ld	de, #0xad00
 	ld	hl, #___str_4
 	call	_d_load
 ;src/lib/disc.c:90: a_page_connect_safe();

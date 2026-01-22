@@ -60,11 +60,11 @@ void main(void) {
 
 			d_load_gfx_to_extended_memory();
 			c_sprite_cache_bank_init();
-			// d_load_music();
+			d_load_music();
 
-			a_page_disconnect_safe();
-			cpct_memcpy(MUSIC_LOC, (u8 *)0x7000, 1843);
-			a_page_connect_safe();
+			// a_page_disconnect_safe();
+			// cpct_memcpy(MUSIC_LOC, (u8 *)0x7000, 1843);
+			// a_page_connect_safe();
 
 			p_start();
 			p_stop();

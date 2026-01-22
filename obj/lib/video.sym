@@ -22,9 +22,9 @@ Symbol Table
     _g_ghost_bob                                                    ******** GX
   2 _last_frame                                                     00000003 R
   0 _v_blank_screen_mode_1                                          00000018 GR
-  0 _v_blank_screen_mode_1_palette_10000_256                        0000002A R
+  0 _v_blank_screen_mode_1_palette_10000_258                        0000002A R
   0 _v_blank_screen_no_asic                                         00000000 GR
-  0 _v_blank_screen_no_asic_black_palette_10000_254                 00000010 R
+  0 _v_blank_screen_no_asic_black_palette_10000_256                 00000010 R
   2 _v_char_scroll                                                  00000001 R
   0 _v_clear_screen                                                 00000032 GR
   2 _v_pixel_scroll                                                 00000000 R
@@ -37,9 +37,9 @@ Symbol Table
   0 _v_set_made_cpctelera_sprite_pos                                000001AF GR
   0 _v_set_title_roland_sprite_pos                                  00000139 GR
   0 _v_snowball_set_frame                                           00000421 GR
-  0 _v_snowball_set_frame_snowball_frame_sprites_10000_299          00000478 R
+  0 _v_snowball_set_frame_snowball_frame_sprites_10000_301          00000478 R
   0 _v_spider_set_frame                                             000003BE GR
-  0 _v_spider_set_frame_spider_frame_sprites_10000_294              00000415 R
+  0 _v_spider_set_frame_spider_frame_sprites_10000_296              00000415 R
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2

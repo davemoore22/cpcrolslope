@@ -50,7 +50,7 @@ Symbol Table
   2 _slopes_phase                                                   00000005 R
   2 _slopes_tick                                                    00000007 R
   0 _t_add_interrupt                                                00000249 R
-  0 _t_add_interrupt_lines_10000_300                                0000025A R
+  0 _t_add_interrupt_lines_10000_302                                0000025A R
   0 _t_ani_roland_l                                                 0000040F R
   0 _t_ani_roland_r                                                 00000429 R
   0 _t_change_game_mode                                             000005FE R
@@ -79,8 +79,8 @@ Symbol Table
   0 _t_pal_top                                                      00000076 R
   0 _t_pal_trees                                                    00000096 R
   0 _t_poll_title_input                                             00000644 R
-  1 _t_poll_title_input_left_was_down_10000_354                     00000009 R
-  1 _t_poll_title_input_right_was_down_10000_354                    0000000A R
+  1 _t_poll_title_input_left_was_down_10000_356                     00000009 R
+  1 _t_poll_title_input_right_was_down_10000_356                    0000000A R
   0 _t_remove_interrupt                                             00000267 R
   0 _t_reset_timers                                                 000001B2 R
   1 _t_roland_active                                                00000008 R

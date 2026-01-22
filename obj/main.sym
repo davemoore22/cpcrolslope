@@ -9,18 +9,17 @@ Symbol Table
     .__.H$L.                                                    =   00000000 L
   A __xinit__g_skip                                                 00000000 R
     _a_page_connect_safe                                            ******** GX
-    _a_page_disconnect_safe                                         ******** GX
     _c_sprite_cache_bank_init                                       ******** GX
     _cpct_asicSetPalette                                            ******** GX
     _cpct_asicUnlock                                                ******** GX
     _cpct_disableFirmware                                           ******** GX
     _cpct_drawSprite                                                ******** GX
-    _cpct_memcpy                                                    ******** GX
     _cpct_pageMemory                                                ******** GX
     _cpct_removeInterruptHandler                                    ******** GX
     _cpct_setStackLocation                                          ******** GX
     _cpct_setVideoMode                                              ******** GX
     _d_load_gfx_to_extended_memory                                  ******** GX
+    _d_load_music                                                   ******** GX
   0 _dummy_cpct_transparentMaskTable0M1_container                   00000000 GR
   1 _g_hw                                                           00000000 GR
   2 _g_skip                                                         00000000 GR
@@ -28,7 +27,7 @@ Symbol Table
     _i_start                                                        ******** GX
     _i_stop                                                         ******** GX
     _img_loading_data                                               ******** GX
-  9 _m_load_pal                                                     00000094 R
+  9 _m_load_pal                                                     00000084 R
     _m_start                                                        ******** GX
     _m_stop                                                         ******** GX
   9 _main                                                           00000000 GR
@@ -39,6 +38,7 @@ Symbol Table
     _t_stop                                                         ******** GX
     _v_blank_screen_no_asic                                         ******** GX
   8 _v_mask_table                                                   00008000 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
 Hexadecimal [32-Bits]
@@ -54,7 +54,7 @@ Area Table
    6 _GSFINAL                                   size        0   flags    0
    7 _v_mask_table_                             size        0   flags    8
    8 _v_mask_table_0                            size      100   flags    8
-   9 _CSEG                                      size       9C   flags    0
+   9 _CSEG                                      size       8C   flags    0
    A _INITIALIZER                               size        1   flags    0
    B _CABS                                      size        0   flags    8
 

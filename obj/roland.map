@@ -14,7 +14,6 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__HOME                         
      00000000  l__v_mask_table_                
      00000000  s__CABS                         
-     00000000  s__CABS0                        
      00000000  s__DABS                         
      00000000  s__v_mask_table_                
      00000000  s__v_mask_table_0               
@@ -57,6 +56,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000044  _cpctelera_7_size_z                
      00000044  _snowball_13_size_z                
      00000045  _spider_6_size_z                   
+     00000047  _mode_4_size_z                     
 ASxxxx Linker V03.00/V05.40 + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
@@ -66,7 +66,6 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000047  _mode_4_size_z                     
      00000047  _mode_5_size_z                     
      00000047  _mode_7_size_z                     
      00000048  _play_0_size_z                     
@@ -103,7 +102,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000076  _roland_2_size_z                   
      00000079  _roland_0_size_z                   
      00000081  _cpctelera_5_size_z                
-     0000009C  l__CSEG                         
+     0000008C  l__CSEG                         
      00000100  _controls_0_size                   
      00000100  _controls_1_size                   
      00000100  _controls_2_size                   
@@ -117,6 +116,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000100  _cpctelera_15_size                 
      00000100  _cpctelera_1_size                  
      00000100  _cpctelera_2_size                  
+     00000100  _cpctelera_3_size                  
 ASxxxx Linker V03.00/V05.40 + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
@@ -126,7 +126,6 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000100  _cpctelera_3_size                  
      00000100  _cpctelera_4_size                  
      00000100  _cpctelera_5_size                  
      00000100  _cpctelera_6_size                  
@@ -177,6 +176,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000100  _spider_0_size                     
      00000100  _spider_10_size                    
      00000100  _spider_11_size                    
+     00000100  _spider_1_size                     
 ASxxxx Linker V03.00/V05.40 + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
@@ -186,7 +186,6 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000100  _spider_1_size                     
      00000100  _spider_2_size                     
      00000100  _spider_3_size                     
      00000100  _spider_4_size                     
@@ -197,7 +196,6 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000100  _spider_9_size                     
      00000100  l__v_mask_table_0               
      00000100  s__CODE                         
-     00000733  l__CABS0                        
      00000F51  l__DATA                         
      000012EB  l_SPRITES                       
      00002F66  l__CODE                         
@@ -210,7 +208,6 @@ Area                                    Addr        Size        Decimal Bytes (A
      00009381  s__GSFINAL                      
      00009381  s__INITIALIZER                  
      000093A2  s__CSEG                         
-
 ASxxxx Linker V03.00/V05.40 + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
@@ -339,8 +336,8 @@ _CODE                               00000100    00002F66 =       12134. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00002F6F  _cpct_memset                       cpct_memutils
-     00002F7D  _cpct_memcpy                       cpct_memutils
+     00002F6F  _cpct_memcpy                       cpct_memutils
+     00002F76  _cpct_memset                       cpct_memutils
      00002F84  _cpct_asicUnlock                   cpct_asic
      00002F84  cpct_asicUnlock_asm                cpct_asic
      00002F97  asic_code                          cpct_asic
@@ -513,24 +510,13 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CSEG                               000093A2    0000009C =         156. bytes (REL,CON)
+_CSEG                               000093A2    0000008C =         140. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      000093A2  _main                              main
 
 ASxxxx Linker V03.00/V05.40 + sdld,  page 15.
-Hexadecimal  [32-Bits]
-
-Area                                    Addr        Size        Decimal Bytes (Attributes)
---------------------------------        ----        ----        ------- ----- ------------
-_CABS0                              00000000    00000733 =        1843. bytes (ABS,CON)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-     00007000  _g_title_music                     sound
-
-ASxxxx Linker V03.00/V05.40 + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -589,7 +575,7 @@ SPRITES                             00004001    000012EB =        4843. bytes (R
      0000454D  _ghost_3_end                       
      0000454E  _ghost_4                           
      00004572  _ghost_4_end                       
-ASxxxx Linker V03.00/V05.40 + sdld,  page 17.
+ASxxxx Linker V03.00/V05.40 + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -649,7 +635,7 @@ SPRITES                             00004001    000012EB =        4843. bytes (R
      00004C4A  _snowball_13                       
      00004C8D  _snowball_13_end                   
      00004C8E  _snowball_14                       
-ASxxxx Linker V03.00/V05.40 + sdld,  page 18.
+ASxxxx Linker V03.00/V05.40 + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -704,7 +690,7 @@ SPRITES                             00004001    000012EB =        4843. bytes (R
      0000529A  _spider_9                          
      000052EB  _spider_9_end                      
 
-ASxxxx Linker V03.00/V05.40 + sdld,  page 19.
+ASxxxx Linker V03.00/V05.40 + sdld,  page 18.
 
 Files Linked                              [ module(s) ]
 
@@ -797,9 +783,9 @@ Libraries Linked                          [ object file ]
 /home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
 /home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
-                                          [ cpct_memset_cbinding.rel ]
-/home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
                                           [ cpct_memcpy_cbindings.rel ]
+/home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
+                                          [ cpct_memset_cbinding.rel ]
 /home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
                                           [ cpct_asicUnlock.rel ]
 /home/dave/Development/Amstrad/cpct/cpctelera/tools/sdcc-4.5.0/bin/../share/sdcc/lib/z80/z80.lib
@@ -821,7 +807,7 @@ Libraries Linked                          [ object file ]
 /home/dave/Development/Amstrad/cpct/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNCStart.rel ]
 
-ASxxxx Linker V03.00/V05.40 + sdld,  page 20.
+ASxxxx Linker V03.00/V05.40 + sdld,  page 19.
 
 User Base Address Definitions
 

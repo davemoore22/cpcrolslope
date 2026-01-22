@@ -20,9 +20,9 @@
 	.globl _i_start
 	.globl _v_blank_screen_no_asic
 	.globl _h_get_details
+	.globl _d_load_music
 	.globl _d_load_gfx_to_extended_memory
 	.globl _c_sprite_cache_bank_init
-	.globl _a_page_disconnect_safe
 	.globl _a_page_connect_safe
 	.globl _cpct_asicUnlock
 	.globl _cpct_asicSetPalette
@@ -30,7 +30,6 @@
 	.globl _cpct_drawSprite
 	.globl _cpct_pageMemory
 	.globl _cpct_setStackLocation
-	.globl _cpct_memcpy
 	.globl _cpct_removeInterruptHandler
 	.globl _cpct_disableFirmware
 	.globl _g_skip
@@ -161,16 +160,8 @@ _main::
 	call	_d_load_gfx_to_extended_memory
 ;src/main.c:62: c_sprite_cache_bank_init();
 	call	_c_sprite_cache_bank_init
-;src/main.c:65: a_page_disconnect_safe();
-	call	_a_page_disconnect_safe
-;src/main.c:66: cpct_memcpy(MUSIC_LOC, (u8 *)0x7000, 1843);
-	ld	hl, #0x0733
-	push	hl
-	ld	de, #0x7000
-	ld	hl, #0xb000
-	call	_cpct_memcpy
-;src/main.c:67: a_page_connect_safe();
-	call	_a_page_connect_safe
+;src/main.c:63: d_load_music();
+	call	_d_load_music
 ;src/main.c:69: p_start();
 	call	_p_start
 ;src/main.c:70: p_stop();

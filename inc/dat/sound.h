@@ -21,5 +21,6 @@
 #include "main.h"
 
 #define MUSIC_LOC ((u8 *)0xb000)
+#define TITLE_MUSIC_LOC ((u8 *)0xad00)
 
-__at(0x7000) extern const u8 g_title_music[];
+//__at(0x7000) extern const u8 g_title_music[];

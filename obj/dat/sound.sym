@@ -7,7 +7,6 @@ Symbol Table
     .__.ABS.                                                    =   00000000 G
     .__.CPU.                                                    =   00000000 L
     .__.H$L.                                                    =   00000000 L
-  9 _g_title_music                                                  00007000 GR
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180 / ZX-Next / eZ80 / R800)                          Page 2
@@ -24,5 +23,4 @@ Area Table
    6 _GSFINAL                                   size        0   flags    0
    7 _INITIALIZER                               size        0   flags    0
    8 _CABS                                      size        0   flags    8
-   9 _CABS0                                     size      733   flags    8
 

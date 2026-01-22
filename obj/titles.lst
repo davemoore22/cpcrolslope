@@ -56,9 +56,9 @@
     00000007                         56 	.ds 1
     00000008                         57 _t_roland_active:
     00000008                         58 	.ds 1
-    00000009                         59 _t_poll_title_input_left_was_down_10000_354:
+    00000009                         59 _t_poll_title_input_left_was_down_10000_356:
     00000009                         60 	.ds 1
-    0000000A                         61 _t_poll_title_input_right_was_down_10000_354:
+    0000000A                         61 _t_poll_title_input_right_was_down_10000_356:
     0000000A                         62 	.ds 1
                                      63 ;--------------------------------------------------------
                                      64 ; ram data
@@ -98,8 +98,8 @@
                                      98 ;src/titles.c:565: static bool left_was_down = false;
                                      99 ;src/titles.c:566: static bool right_was_down = false;
     00000000 AF               [ 4]  100 	xor	a, a
-    00000001 32r09r00         [13]  101 	ld	(_t_poll_title_input_left_was_down_10000_354+0), a
-    00000004 32r0Ar00         [13]  102 	ld	(_t_poll_title_input_right_was_down_10000_354+0), a
+    00000001 32r09r00         [13]  101 	ld	(_t_poll_title_input_left_was_down_10000_356+0), a
+    00000004 32r0Ar00         [13]  102 	ld	(_t_poll_title_input_right_was_down_10000_356+0), a
                                     103 ;--------------------------------------------------------
                                     104 ; Home
                                     105 ;--------------------------------------------------------
@@ -144,9 +144,9 @@
     00000028 CDrBAr01         [17]  144 	call	_t_draw_game_mode
                                     145 ;src/titles.c:179: t_draw_static_sprites();
     0000002B CDr17r01         [17]  146 	call	_t_draw_static_sprites
-                                    147 ;src/titles.c:181: cpct_PLY_AKG_Init(MUSIC_LOC, 0);
+                                    147 ;src/titles.c:181: cpct_PLY_AKG_Init(TITLE_MUSIC_LOC, 0);
     0000002E 11 00 00         [10]  148 	ld	de, #0x0000
-    00000031 21 00 B0         [10]  149 	ld	hl, #0xb000
+    00000031 21 00 AD         [10]  149 	ld	hl, #0xad00
     00000034 CDr00r00         [17]  150 	call	_cpct_PLY_AKG_Init
                                     151 ;src/titles.c:183: t_reset_timers();
     00000037 CDrB2r01         [17]  152 	call	_t_reset_timers
@@ -524,12 +524,12 @@
                                     523 ;src/titles.c:331: cpct_asicSetLinesInterruptHandler(t_interrupt, lines, sizeof(lines));
     0000024C 21 0D 00         [10]  524 	ld	hl, #0x000d
     0000024F E5               [11]  525 	push	hl
-    00000250 11r5Ar02         [10]  526 	ld	de, #_t_add_interrupt_lines_10000_300
+    00000250 11r5Ar02         [10]  526 	ld	de, #_t_add_interrupt_lines_10000_302
     00000253 21r6Ar02         [10]  527 	ld	hl, #_t_interrupt
     00000256 CDr00r00         [17]  528 	call	_cpct_asicSetLinesInterruptHandler
                                     529 ;src/titles.c:332: }
     00000259 C9               [10]  530 	ret
-    0000025A                        531 _t_add_interrupt_lines_10000_300:
+    0000025A                        531 _t_add_interrupt_lines_10000_302:
     0000025A 00                     532 	.db #0x00	; 0
     0000025B 06                     533 	.db #0x06	; 6
     0000025C 0C                     534 	.db #0x0c	; 12
@@ -1296,7 +1296,7 @@
                                    1295 ;src/titles.c:573: if (left_down && !left_was_down)
     0000065C CB 43            [ 8] 1296 	bit	0, e
     0000065E 28 0B            [12] 1297 	jr	Z, 00105$
-    00000660 21r09r00         [10] 1298 	ld	hl, #_t_poll_title_input_left_was_down_10000_354
+    00000660 21r09r00         [10] 1298 	ld	hl, #_t_poll_title_input_left_was_down_10000_356
     00000663 CB 46            [12] 1299 	bit	0, (hl)
     00000665 20 04            [12] 1300 	jr	NZ, 00105$
                                    1301 ;src/titles.c:574: result = TITLE_INPUT_LEFT;
@@ -1306,17 +1306,17 @@
                                    1305 ;src/titles.c:575: else if (right_down && !right_was_down)
     0000066B CB 40            [ 8] 1306 	bit	0, b
     0000066D 28 09            [12] 1307 	jr	Z, 00106$
-    0000066F 21r0Ar00         [10] 1308 	ld	hl, #_t_poll_title_input_right_was_down_10000_354
+    0000066F 21r0Ar00         [10] 1308 	ld	hl, #_t_poll_title_input_right_was_down_10000_356
     00000672 CB 46            [12] 1309 	bit	0, (hl)
     00000674 20 02            [12] 1310 	jr	NZ, 00106$
                                    1311 ;src/titles.c:576: result = TITLE_INPUT_RIGHT;
     00000676 0E 01            [ 7] 1312 	ld	c, #0x01
     00000678                       1313 00106$:
                                    1314 ;src/titles.c:578: left_was_down = left_down;
-    00000678 21r09r00         [10] 1315 	ld	hl, #_t_poll_title_input_left_was_down_10000_354
+    00000678 21r09r00         [10] 1315 	ld	hl, #_t_poll_title_input_left_was_down_10000_356
     0000067B 73               [ 7] 1316 	ld	(hl), e
                                    1317 ;src/titles.c:579: right_was_down = right_down;
-    0000067C 21r0Ar00         [10] 1318 	ld	hl, #_t_poll_title_input_right_was_down_10000_354
+    0000067C 21r0Ar00         [10] 1318 	ld	hl, #_t_poll_title_input_right_was_down_10000_356
     0000067F 70               [ 7] 1319 	ld	(hl), b
                                    1320 ;src/titles.c:581: return result;
     00000680 79               [ 4] 1321 	ld	a, c

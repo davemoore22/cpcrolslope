@@ -178,7 +178,7 @@ void t_start(void) {
 	t_draw_game_mode();
 	t_draw_static_sprites();
 
-	cpct_PLY_AKG_Init(MUSIC_LOC, 0);
+	cpct_PLY_AKG_Init(TITLE_MUSIC_LOC, 0);
 
 	t_reset_timers();
 	cpct_asicSetBorder(cpctm_asicColor(15, 15, 15));

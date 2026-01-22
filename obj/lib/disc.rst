@@ -234,8 +234,8 @@
     00001556                        230 _d_load_music::
                                     231 ;src/lib/disc.c:88: a_page_disconnect_safe();
     00001556 CD B4 12         [17]  232 	call	_a_page_disconnect_safe
-                                    233 ;src/lib/disc.c:89: d_load("MUSIC   BIN", MUSIC_LOC);
-    00001559 11 00 B0         [10]  234 	ld	de, #0xb000
+                                    233 ;src/lib/disc.c:89: d_load("MUSIC   BIN", TITLE_MUSIC_LOC);
+    00001559 11 00 AD         [10]  234 	ld	de, #0xad00
     0000155C 21 65 15         [10]  235 	ld	hl, #___str_4
     0000155F CD 7C 14         [17]  236 	call	_d_load
                                     237 ;src/lib/disc.c:90: a_page_connect_safe();

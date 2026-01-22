@@ -254,7 +254,7 @@
     000010DD F5               [11]  254 	push	af
     000010DE 33               [ 6]  255 	inc	sp
     000010DF 26 BF            [ 7]  256 	ld	h, #0xbf
-    000010E1 CD 6F 2F         [17]  257 	call	_cpct_memset
+    000010E1 CD 76 2F         [17]  257 	call	_cpct_memset
                                     258 ;src/lib/asic.c:79: cpct_waitVSYNCStart();
     000010E4 CD 59 30         [17]  259 	call	_cpct_waitVSYNCStart
                                     260 ;src/lib/asic.c:80: cpct_asicPageDisconnect();

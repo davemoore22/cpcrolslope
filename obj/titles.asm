@@ -56,9 +56,9 @@ _t_roland_y:
 	.ds 1
 _t_roland_active:
 	.ds 1
-_t_poll_title_input_left_was_down_10000_354:
+_t_poll_title_input_left_was_down_10000_356:
 	.ds 1
-_t_poll_title_input_right_was_down_10000_354:
+_t_poll_title_input_right_was_down_10000_356:
 	.ds 1
 ;--------------------------------------------------------
 ; ram data
@@ -98,8 +98,8 @@ _t_mode_cooldown:
 ;src/titles.c:565: static bool left_was_down = false;
 ;src/titles.c:566: static bool right_was_down = false;
 	xor	a, a
-	ld	(_t_poll_title_input_left_was_down_10000_354+0), a
-	ld	(_t_poll_title_input_right_was_down_10000_354+0), a
+	ld	(_t_poll_title_input_left_was_down_10000_356+0), a
+	ld	(_t_poll_title_input_right_was_down_10000_356+0), a
 ;--------------------------------------------------------
 ; Home
 ;--------------------------------------------------------
@@ -144,9 +144,9 @@ _t_start::
 	call	_t_draw_game_mode
 ;src/titles.c:179: t_draw_static_sprites();
 	call	_t_draw_static_sprites
-;src/titles.c:181: cpct_PLY_AKG_Init(MUSIC_LOC, 0);
+;src/titles.c:181: cpct_PLY_AKG_Init(TITLE_MUSIC_LOC, 0);
 	ld	de, #0x0000
-	ld	hl, #0xb000
+	ld	hl, #0xad00
 	call	_cpct_PLY_AKG_Init
 ;src/titles.c:183: t_reset_timers();
 	call	_t_reset_timers
@@ -523,12 +523,12 @@ _t_add_interrupt:
 ;src/titles.c:331: cpct_asicSetLinesInterruptHandler(t_interrupt, lines, sizeof(lines));
 	ld	hl, #0x000d
 	push	hl
-	ld	de, #_t_add_interrupt_lines_10000_300
+	ld	de, #_t_add_interrupt_lines_10000_302
 	ld	hl, #_t_interrupt
 	call	_cpct_asicSetLinesInterruptHandler
 ;src/titles.c:332: }
 	ret
-_t_add_interrupt_lines_10000_300:
+_t_add_interrupt_lines_10000_302:
 	.db #0x00	; 0
 	.db #0x06	; 6
 	.db #0x0c	; 12
@@ -1295,7 +1295,7 @@ _t_poll_title_input:
 ;src/titles.c:573: if (left_down && !left_was_down)
 	bit	0, e
 	jr	Z, 00105$
-	ld	hl, #_t_poll_title_input_left_was_down_10000_354
+	ld	hl, #_t_poll_title_input_left_was_down_10000_356
 	bit	0, (hl)
 	jr	NZ, 00105$
 ;src/titles.c:574: result = TITLE_INPUT_LEFT;
@@ -1305,17 +1305,17 @@ _t_poll_title_input:
 ;src/titles.c:575: else if (right_down && !right_was_down)
 	bit	0, b
 	jr	Z, 00106$
-	ld	hl, #_t_poll_title_input_right_was_down_10000_354
+	ld	hl, #_t_poll_title_input_right_was_down_10000_356
 	bit	0, (hl)
 	jr	NZ, 00106$
 ;src/titles.c:576: result = TITLE_INPUT_RIGHT;
 	ld	c, #0x01
 00106$:
 ;src/titles.c:578: left_was_down = left_down;
-	ld	hl, #_t_poll_title_input_left_was_down_10000_354
+	ld	hl, #_t_poll_title_input_left_was_down_10000_356
 	ld	(hl), e
 ;src/titles.c:579: right_was_down = right_down;
-	ld	hl, #_t_poll_title_input_right_was_down_10000_354
+	ld	hl, #_t_poll_title_input_right_was_down_10000_356
 	ld	(hl), b
 ;src/titles.c:581: return result;
 	ld	a, c

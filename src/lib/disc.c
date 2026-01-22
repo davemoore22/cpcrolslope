@@ -86,6 +86,6 @@ void d_load_gfx_to_extended_memory(void) {
 void d_load_music(void) {
 
 	a_page_disconnect_safe();
-	d_load("MUSIC   BIN", MUSIC_LOC);
+	d_load("MUSIC   BIN", TITLE_MUSIC_LOC);
 	a_page_connect_safe();
 }

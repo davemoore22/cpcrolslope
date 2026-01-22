@@ -72,14 +72,14 @@
     00000000                         72 _v_blank_screen_no_asic::
                                      73 ;src/lib/video.c:29: cpct_setPalette(black_palette, 4);
     00000000 11 04 00         [10]   74 	ld	de, #0x0004
-    00000003 21r10r00         [10]   75 	ld	hl, #_v_blank_screen_no_asic_black_palette_10000_254
+    00000003 21r10r00         [10]   75 	ld	hl, #_v_blank_screen_no_asic_black_palette_10000_256
     00000006 CDr00r00         [17]   76 	call	_cpct_setPalette
                                      77 ;src/lib/video.c:30: cpct_setBorder(HW_BLACK);
     00000009 2E 14            [ 7]   78 	ld	l, #0x14
     0000000B 3E 10            [ 7]   79 	ld	a, #0x10
                                      80 ;src/lib/video.c:31: }
     0000000D C3r00r00         [10]   81 	jp	_cpct_setPALColour
-    00000010                         82 _v_blank_screen_no_asic_black_palette_10000_254:
+    00000010                         82 _v_blank_screen_no_asic_black_palette_10000_256:
     00000010 14 00                   83 	.dw #0x0014
     00000012 14 00                   84 	.dw #0x0014
     00000014 14 00                   85 	.dw #0x0014
@@ -93,13 +93,13 @@
     00000018 CDr00r00         [17]   93 	call	_cpct_waitVSYNC
                                      94 ;src/lib/video.c:41: cpct_asicSetPalette(palette, 4);
     0000001B 11 04 00         [10]   95 	ld	de, #0x0004
-    0000001E 21r2Ar00         [10]   96 	ld	hl, #_v_blank_screen_mode_1_palette_10000_256
+    0000001E 21r2Ar00         [10]   96 	ld	hl, #_v_blank_screen_mode_1_palette_10000_258
     00000021 CDr00r00         [17]   97 	call	_cpct_asicSetPalette
                                      98 ;src/lib/video.c:42: cpct_asicSetBorder(cpctm_asicColor(15, 15, 15));
     00000024 21 FF 0F         [10]   99 	ld	hl, #0x0fff
                                     100 ;src/lib/video.c:43: }
     00000027 C3r00r00         [10]  101 	jp	_cpct_asicSetBorder
-    0000002A                        102 _v_blank_screen_mode_1_palette_10000_256:
+    0000002A                        102 _v_blank_screen_mode_1_palette_10000_258:
     0000002A FF 0F                  103 	.dw #0x0fff
     0000002C FF 0F                  104 	.dw #0x0fff
     0000002E FF 0F                  105 	.dw #0x0fff
@@ -520,7 +520,7 @@
     00000270 26 00            [ 7]  520 	ld	h, #0x00
     00000272 29               [11]  521 	add	hl, hl
     00000273 29               [11]  522 	add	hl, hl
-    00000274 11rE4r02         [10]  523 	ld	de, #_v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_285
+    00000274 11rE4r02         [10]  523 	ld	de, #_v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_287
     00000277 19               [11]  524 	add	hl, de
     00000278 4D               [ 4]  525 	ld	c, l
     00000279 44               [ 4]  526 	ld	b, h
@@ -586,7 +586,7 @@
     000002E1 E1               [10]  586 	pop	hl
     000002E2 33               [ 6]  587 	inc	sp
     000002E3 E9               [ 4]  588 	jp	(hl)
-    000002E4                        589 _v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_285:
+    000002E4                        589 _v_set_intro_spider_sprite_pos_spider_frame_sprites_10001_287:
     000002E4 00                     590 	.db #0x00	; 0
     000002E5 01                     591 	.db #0x01	; 1
     000002E6 06                     592 	.db #0x06	; 6
@@ -637,7 +637,7 @@
     0000033A 26 00            [ 7]  637 	ld	h, #0x00
     0000033C 29               [11]  638 	add	hl, hl
     0000033D 29               [11]  639 	add	hl, hl
-    0000033E 11rAEr03         [10]  640 	ld	de, #_v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_290
+    0000033E 11rAEr03         [10]  640 	ld	de, #_v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_292
     00000341 19               [11]  641 	add	hl, de
     00000342 4D               [ 4]  642 	ld	c, l
     00000343 44               [ 4]  643 	ld	b, h
@@ -703,7 +703,7 @@
     000003AB E1               [10]  703 	pop	hl
     000003AC 33               [ 6]  704 	inc	sp
     000003AD E9               [ 4]  705 	jp	(hl)
-    000003AE                        706 _v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_290:
+    000003AE                        706 _v_set_intro_snowball_sprite_pos_snowball_frame_sprites_10001_292:
     000003AE 00                     707 	.db #0x00	; 0
     000003AF 01                     708 	.db #0x01	; 1
     000003B0 08                     709 	.db #0x08	; 8
@@ -746,7 +746,7 @@
     000003D2 26 00            [ 7]  746 	ld	h, #0x00
     000003D4 29               [11]  747 	add	hl, hl
     000003D5 29               [11]  748 	add	hl, hl
-    000003D6 11r15r04         [10]  749 	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_294
+    000003D6 11r15r04         [10]  749 	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_296
     000003D9 19               [11]  750 	add	hl, de
     000003DA 58               [ 4]  751 	ld	e, b
     000003DB 16 00            [ 7]  752 	ld	d, #0x00
@@ -773,7 +773,7 @@
     000003F5 26 00            [ 7]  773 	ld	h, #0x00
     000003F7 29               [11]  774 	add	hl, hl
     000003F8 29               [11]  775 	add	hl, hl
-    000003F9 11r15r04         [10]  776 	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_294
+    000003F9 11r15r04         [10]  776 	ld	de, #_v_spider_set_frame_spider_frame_sprites_10000_296
     000003FC 19               [11]  777 	add	hl, de
     000003FD 58               [ 4]  778 	ld	e, b
     000003FE 16 00            [ 7]  779 	ld	d, #0x00
@@ -794,7 +794,7 @@
     00000413 71               [ 7]  794 	ld	(hl), c
                                     795 ;src/lib/video.c:290: }
     00000414 C9               [10]  796 	ret
-    00000415                        797 _v_spider_set_frame_spider_frame_sprites_10000_294:
+    00000415                        797 _v_spider_set_frame_spider_frame_sprites_10000_296:
     00000415 00                     798 	.db #0x00	; 0
     00000416 01                     799 	.db #0x01	; 1
     00000417 06                     800 	.db #0x06	; 6
@@ -833,7 +833,7 @@
     00000435 26 00            [ 7]  833 	ld	h, #0x00
     00000437 29               [11]  834 	add	hl, hl
     00000438 29               [11]  835 	add	hl, hl
-    00000439 11r78r04         [10]  836 	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_299
+    00000439 11r78r04         [10]  836 	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_301
     0000043C 19               [11]  837 	add	hl, de
     0000043D 58               [ 4]  838 	ld	e, b
     0000043E 16 00            [ 7]  839 	ld	d, #0x00
@@ -860,7 +860,7 @@
     00000458 26 00            [ 7]  860 	ld	h, #0x00
     0000045A 29               [11]  861 	add	hl, hl
     0000045B 29               [11]  862 	add	hl, hl
-    0000045C 11r78r04         [10]  863 	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_299
+    0000045C 11r78r04         [10]  863 	ld	de, #_v_snowball_set_frame_snowball_frame_sprites_10000_301
     0000045F 19               [11]  864 	add	hl, de
     00000460 58               [ 4]  865 	ld	e, b
     00000461 16 00            [ 7]  866 	ld	d, #0x00
@@ -881,7 +881,7 @@
     00000476 71               [ 7]  881 	ld	(hl), c
                                     882 ;src/lib/video.c:312: }
     00000477 C9               [10]  883 	ret
-    00000478                        884 _v_snowball_set_frame_snowball_frame_sprites_10000_299:
+    00000478                        884 _v_snowball_set_frame_snowball_frame_sprites_10000_301:
     00000478 00                     885 	.db #0x00	; 0
     00000479 01                     886 	.db #0x01	; 1
     0000047A 08                     887 	.db #0x08	; 8

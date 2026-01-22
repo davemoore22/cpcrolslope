@@ -316,7 +316,7 @@
     000013F7 F5               [11]  316 	push	af
     000013F8 33               [ 6]  317 	inc	sp
     000013F9 21 00 BF         [10]  318 	ld	hl, #0xbf00
-    000013FC CD 6F 2F         [17]  319 	call	_cpct_memset
+    000013FC CD 76 2F         [17]  319 	call	_cpct_memset
     000013FF E1               [10]  320 	pop	hl
                                     321 ;src/lib/cache.c:110: cpct_zx7b_decrunch_s(buf_end, src->end);
     00001400 23               [ 6]  322 	inc	hl
@@ -344,7 +344,7 @@
     00001422 11 00 01         [10]  344 	ld	de, #0x0100
     00001425 D5               [11]  345 	push	de
     00001426 11 00 BF         [10]  346 	ld	de, #0xbf00
-    00001429 CD 7D 2F         [17]  347 	call	_cpct_memcpy
+    00001429 CD 6F 2F         [17]  347 	call	_cpct_memcpy
                                     348 ;src/lib/cache.c:124: cpct_pageMemory(RAMCFG_0 | BANK_0);
     0000142C 2E 00            [ 7]  349 	ld	l, #0x00
     0000142E CD 50 30         [17]  350 	call	_cpct_pageMemory
@@ -374,7 +374,7 @@
     00001448 F5               [11]  374 	push	af
     00001449 33               [ 6]  375 	inc	sp
     0000144A 21 00 BF         [10]  376 	ld	hl, #0xbf00
-    0000144D CD 6F 2F         [17]  377 	call	_cpct_memset
+    0000144D CD 76 2F         [17]  377 	call	_cpct_memset
     00001450 E1               [10]  378 	pop	hl
                                     379 ;src/lib/cache.c:142: cpct_memcpy(HW_SPRITE_BUFFER, (u8 *)(SPRITE_BANK_BASE + bank_offset),
     00001451 01 01 40         [10]  380 	ld	bc, #0x4001
@@ -383,7 +383,7 @@
     00001458 EB               [ 4]  383 	ex	de, hl
     00001459 E5               [11]  384 	push	hl
     0000145A 21 00 BF         [10]  385 	ld	hl, #0xbf00
-    0000145D CD 7D 2F         [17]  386 	call	_cpct_memcpy
+    0000145D CD 6F 2F         [17]  386 	call	_cpct_memcpy
                                     387 ;src/lib/cache.c:146: cpct_pageMemory(RAMCFG_0 | BANK_0);
     00001460 2E 00            [ 7]  388 	ld	l, #0x00
     00001462 CD 50 30         [17]  389 	call	_cpct_pageMemory

@@ -234,8 +234,8 @@
     000000DA                        230 _d_load_music::
                                     231 ;src/lib/disc.c:88: a_page_disconnect_safe();
     000000DA CDr00r00         [17]  232 	call	_a_page_disconnect_safe
-                                    233 ;src/lib/disc.c:89: d_load("MUSIC   BIN", MUSIC_LOC);
-    000000DD 11 00 B0         [10]  234 	ld	de, #0xb000
+                                    233 ;src/lib/disc.c:89: d_load("MUSIC   BIN", TITLE_MUSIC_LOC);
+    000000DD 11 00 AD         [10]  234 	ld	de, #0xad00
     000000E0 21rE9r00         [10]  235 	ld	hl, #___str_4
     000000E3 CDr00r00         [17]  236 	call	_d_load
                                     237 ;src/lib/disc.c:90: a_page_connect_safe();

@@ -5,7 +5,6 @@ DEF l__GSFINAL 0x0
 DEF l__HOME 0x0
 DEF l__v_mask_table_ 0x0
 DEF s__CABS 0x0
-DEF s__CABS0 0x0
 DEF s__DABS 0x0
 DEF s__v_mask_table_ 0x0
 DEF s__v_mask_table_0 0x0
@@ -85,7 +84,7 @@ DEF _cpctelera_4_size_z 0x76
 DEF _roland_2_size_z 0x76
 DEF _roland_0_size_z 0x79
 DEF _cpctelera_5_size_z 0x81
-DEF l__CSEG 0x9C
+DEF l__CSEG 0x8C
 DEF _controls_0_size 0x100
 DEF _controls_1_size 0x100
 DEF _controls_2_size 0x100
@@ -161,7 +160,6 @@ DEF _spider_8_size 0x100
 DEF _spider_9_size 0x100
 DEF l__v_mask_table_0 0x100
 DEF s__CODE 0x100
-DEF l__CABS0 0x733
 DEF l__DATA 0xF51
 DEF l_SPRITES 0x12EB
 DEF l__CODE 0x2F66
@@ -275,8 +273,8 @@ DEF _cpct_zx7b_decrunch_s 0x2F18
 DEF _cpct_setVideoMode 0x2F59
 DEF _cpct_waitVSYNC 0x2F67
 DEF cpct_waitVSYNC_asm 0x2F67
-DEF _cpct_memset 0x2F6F
-DEF _cpct_memcpy 0x2F7D
+DEF _cpct_memcpy 0x2F6F
+DEF _cpct_memset 0x2F76
 DEF _cpct_asicUnlock 0x2F84
 DEF cpct_asicUnlock_asm 0x2F84
 DEF asic_code 0x2F97
@@ -388,7 +386,6 @@ DEF _g_game_mode 0x935F
 DEF _g_clock 0x936A
 DEF _v_mask_table 0x8000
 DEF _main 0x93A2
-DEF _g_title_music 0x7000
 DEF _controls_0 0x4001
 DEF _controls_0_end 0x4049
 DEF _controls_1 0x404A
